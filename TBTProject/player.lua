@@ -1,0 +1,6 @@
+-------------------------------------------
+--player.lua
+--pulls player ships from images
+--settings for each ship will be seperate
+--pulls for the settings
+-------------------------------------------
