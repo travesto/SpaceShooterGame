@@ -18,18 +18,12 @@ local screenW, screenH, halfW = display.contentWidth, display.contentHeight, dis
 
 function scene:create( event )
 
-	-- Called when the scene's view does not exist.
-	-- 
-	-- INSERT code here to initialize the scene
-	-- e.g. add display objects to 'sceneGroup', add touch listeners, etc.
 
 	local sceneGroup = self.view
 
 	-- create a grey rectangle as the backdrop
 	local background = display.newImageRect("assets/art/background.jpg", screenW, screenH )
-	background.anchorX = 0
-	background.anchorY = 0
-	background:setFillColor( .5 )
+	local player = display.newImage("assets/art/RedRacer.png, 0,0)
 	
 
 	
@@ -38,6 +32,7 @@ function scene:create( event )
 
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
+	sceneGroup:insert(player)
 	
 end
 
