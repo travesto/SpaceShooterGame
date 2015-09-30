@@ -26,7 +26,7 @@ function scene:create( event )
 	local sceneGroup = self.view
 
 	-- create a grey rectangle as the backdrop
-	local background = display.newRect( 0, 0, screenW, screenH )
+	local background = display.newImageRect("assets/art/background.jpg", screenW, screenH )
 	background.anchorX = 0
 	background.anchorY = 0
 	background:setFillColor( .5 )
