@@ -4,7 +4,7 @@
 --
 -----------------------------------------------------------------------------------------
 
-local composer = require( "composer" )
+local storyboard = require( "storyboard" )
 local scene = composer.newScene()
 
 -- include Corona's "widget" library
@@ -19,7 +19,7 @@ local playBtn
 local function onPlayBtnRelease()
 	
 	-- go to level1.lua scene
-	composer.gotoScene( "level1", "fade", 500 )
+	storyboard.gotoScene( "level1", "fade", 500 )
 	
 	return true	-- indicates successful touch
 end
