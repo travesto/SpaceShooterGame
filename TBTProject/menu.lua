@@ -4,8 +4,8 @@
 --
 -----------------------------------------------------------------------------------------
 
-local composer = require( "composer" )
-local scene = composer.newScene()
+local storyboard = require( "storyboard" )
+local scene = storyboard.newScene()
 
 -- include Corona's "widget" library
 local widget = require "widget"
@@ -57,21 +57,22 @@ function scene:create( event )
 	playBtn.x = display.contentWidth*0.5
 	playBtn.y = display.contentHeight - 125
 
-	slctBtn = widget.newButton{
-		label="Select Ship",
-		labelColor = {default={255}, over={128} },
-		default="button.png",
-		over="button-over.png",
+--	slctBtn = widget.newButton{
+--		label="Select Ship",
+--		labelColor = {default={255}, over={128} },
+--		default="button.png",
+--		over="button-over.png",
 
-		onRelease = onSlctBtnRelease --event listener
-	}
-	slctBtn.x = display.contentWidth*0.75
-	slctBtn.y = display.contentHeight - 125
+--		onRelease = onSlctBtnRelease --event listener
+--	}
+--	slctBtn.x = display.contentWidth*0.75
+--	slctBtn.y = display.contentHeight - 125
 	
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
 	--sceneGroup:insert( titleLogo )
 	sceneGroup:insert( playBtn )
+--	sceneGroup:insert( slctBtn )
 end
 
 function scene:show( event )

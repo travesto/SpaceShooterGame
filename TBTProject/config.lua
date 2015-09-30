@@ -10,8 +10,8 @@ if string.sub(system.getInfo("model"),1,4) == "iPad" then
     {
         content =
         {
-            width = 1536,
-            height = 2048,
+            width = 360,
+            height = 512,
             scale = "letterBox",
             xAlign = "center",
             yAlign = "center",
