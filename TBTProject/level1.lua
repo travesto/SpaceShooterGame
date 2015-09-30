@@ -4,7 +4,7 @@
 --
 -----------------------------------------------------------------------------------------
 
-local composer = require( "composer" )
+local storyboard = require( "storyboard" )
 local scene = composer.newScene()
 
 -- include Corona's "physics" library
