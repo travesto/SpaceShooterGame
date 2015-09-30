@@ -1,14 +1,14 @@
------------------------------------------------------------------------------------------
---
--- main.lua
---
------------------------------------------------------------------------------------------
+--Main.lua changed Wed september 30
 
--- hide the status bar
-display.setStatusBar( display.HiddenStatusBar )
+--no status bar
+display.setStatusBar(display.HiddenStatusBar)
 
--- include the Corona "composer" module
-local composer = require "composer"
+--anchors
+display.setDefault("anchorX", 0)
+display.setDefualt("anchorY", 0)
 
--- load menu screen
-composer.gotoScene( "menu" )
+--random seed
+math.randomseed(os.time())
+
+local storyboard = require"storyboard"
+storyboard.gotoScene("menu")
