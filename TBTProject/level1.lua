@@ -4,91 +4,45 @@
 --
 -----------------------------------------------------------------------------------------
 
-local storyboard = require( "storyboard" )
+local composer = require( "composer" )
 local scene = composer.newScene()
 
--- include Corona's "physics" library
-local physics = require "physics"
-physics.start(); physics.pause()
-
---------------------------------------------
-
--- forward declarations and other locals
-local screenW, screenH, halfW = display.contentWidth, display.contentHeight, display.contentWidth*0.5
-
-function scene:create( event )
-
-
-	local sceneGroup = self.view
-
-	-- create a grey rectangle as the backdrop
-	local background = display.newImageRect("assets/art/background.jpg", screenW, screenH )
-	local player = display.newImage("assets/art/RedRacer.png, 0,0)
-	
-
-	
-	
-	
-
-	-- all display objects must be inserted into group
-	sceneGroup:insert( background )
-	sceneGroup:insert(player)
-	
-end
-
-
-function scene:show( event )
-	local sceneGroup = self.view
-	local phase = event.phase
-	
-	if phase == "will" then
-		-- Called when the scene is still off screen and is about to move on screen
-	elseif phase == "did" then
-		-- Called when the scene is now on screen
-		-- 
-		-- INSERT code here to make the scene come alive
-		-- e.g. start timers, begin animation, play audio, etc.
-		physics.start()
-	end
-end
-
-function scene:hide( event )
-	local sceneGroup = self.view
-	
-	local phase = event.phase
-	
-	if event.phase == "will" then
-		-- Called when the scene is on screen and is about to move off screen
-		--
-		-- INSERT code here to pause the scene
-		-- e.g. stop timers, stop animation, unload sounds, etc.)
-		physics.stop()
-	elseif phase == "did" then
-		-- Called when the scene is now off screen
-	end	
-	
-end
-
-function scene:destroy( event )
-
-	-- Called prior to the removal of scene's "view" (sceneGroup)
-	-- 
-	-- INSERT code here to cleanup the scene
-	-- e.g. remove display objects, remove touch listeners, save state, etc.
-	local sceneGroup = self.view
-	
-	package.loaded[physics] = nil
-	physics = nil
-end
-
----------------------------------------------------------------------------------
-
--- Listener setup
-scene:addEventListener( "create", scene )
-scene:addEventListener( "show", scene )
-scene:addEventListener( "hide", scene )
-scene:addEventListener( "destroy", scene )
-
+--vars-----------------------------------------------------------------------------------
+local playerSpeedY = 0
+local playerSpeedX = 0
+local playerMoveSpeed = 7
+local playerWidth  = 60
+local playerHeight = 48
+local bulletWidth  = 8
+local bulletHeight =  19
+local asteroidHeight = 81
+local asteroidWidth = 100
+local numberofEnemysToGenerate = 0
+local numberOfEnemysGenerated = 0
+local playerBullets = {} -- Holds all the bullets the player fires
+local enemyBullets = {} -- Hold the bullets from "all" enemy ships
+local asteroid = {} --  Holds all the asteroids
+local shipGrid = {} -- Holds 0 or 1 (11 of them for making a grid system)
+local enemyShips = {}  -- Holds all of the enemy planes
+local livesImages = {}  -- Holds all of the "free life" images
+local numberOfLives = 3
+local freeLifes = {} -- Holds all the ingame free lives
+local playerIsInvincible = false --for debugs
+local gameOver = false
+local numberOfTicks = 0 -- A number that is incremented each frame of the game
+local asteroidGroup -- A group to hold all of the asteroids
+local shipGroup -- A group that holds all the ships, bullets, etc
+local player
+local shipSoundChannel -- SoundChannel for the 
+local firePlayerBulletTimer
+local generateAsteroidTimer
+local fireEnemyBulletsTimer
+local generateFreeLifeTimer
+local rectUp -- The "up" control on the DPAD
+local rectDown -- The "down" control on the DPAD
+local rectLeft -- The "left" control on the DPAD
+local rectRight -- The "right" control on the DPAD
 -----------------------------------------------------------------------------------------
+
 
 return scene
