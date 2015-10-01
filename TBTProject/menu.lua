@@ -19,7 +19,7 @@ local playBtn
 local function onPlayBtnRelease()
 	
 	-- go to game
-	composer.gotoScene( "gameplay", "fade", 500 )
+	composer.gotoScene( "scene1", "fade", 500 )
 	
 	return true	-- indicates successful touch
 end
