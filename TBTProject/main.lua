@@ -11,11 +11,22 @@ display.setDefault("anchorX", 0)
 display.setDefault("anchorY", 0)
 
 --RNG systems
-math.randomseed(os.time())
+math.randomseed( os.time() )
 
 
 -- include the Corona "composer" module
-local storyboard = require "storyboard"
+local composer = require "composer"
 
 -- load menu screen
-storyboard.gotoScene( "menu" )
+composer.gotoScene( "menu" )
+
+--function scene:create( event )
+--	local group = self.view
+--    setupBackground()
+--    setupGroups()
+--    setupDisplay()
+--    setupPlayer()
+--end
+--scene:addEventListener( "create", scene)
+
+

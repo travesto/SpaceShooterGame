@@ -4,8 +4,8 @@
 --
 -----------------------------------------------------------------------------------------
 
-local storyboard = require( "storyboard" )
-local scene = storyboard.newScene()
+local composer = require( "composer" )
+local scene = composer.newScene()
 
 --vars-----------------------------------------------------------------------------------
 local playerSpeedY = 0
@@ -33,7 +33,7 @@ local numberOfTicks = 0 -- A number that is incremented each frame of the game
 local asteroidGroup -- A group to hold all of the asteroids
 local shipGroup -- A group that holds all the ships, bullets, etc
 local player
-local  shipSoundChannel -- SoundChannel for the 
+local shipSoundChannel -- SoundChannel for the 
 local firePlayerBulletTimer
 local generateAsteroidTimer
 local fireEnemyBulletsTimer

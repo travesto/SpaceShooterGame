@@ -1,11 +1,11 @@
 -----------------------------------------------------------------------------------------
 --
 -- menu.lua
---
+--161395 na customer
 -----------------------------------------------------------------------------------------
 
-local storyboard = require( "storyboard" )
-local scene = storyboard.newScene()
+local composer = require( "composer" )
+local scene = composer.newScene()
 
 -- include Corona's "widget" library
 local widget = require "widget"
@@ -18,11 +18,132 @@ local playBtn
 -- 'onRelease' event listener for playBtn
 local function onPlayBtnRelease()
 	
-	-- go to level1.lua scene
-	composer.gotoScene( "level1", "fade", 500 )
+	-- go to game
+	composer.gotoScene( "gameplay", "fade", 500 )
 	
 	return true	-- indicates successful touch
 end
+
+--backgroud generator
+function setupBackground()
+	local background = display.newRect(0,0, display.contentWidth, display.contentHeight)
+	background:setFillColor(0)
+	scene.view:insert(background)
+end
+	
+--setup groupings
+function setupGroups()
+    asteroidGroup = display.newGroup()
+    shipGroup = display.newGroup()
+    scene.view:insert(asteroidGroup)
+    scene.view:insert(shipGroup)
+end
+
+--display setup
+function setupDisplay ()
+    local tempRect = display.newRect(0,display.contentHeight-70,display.contentWidth,124);
+    tempRect:setFillColor(0);
+    scene.view:insert(tempRect)
+    --local logo = display.newImage("logo.png", display.contentWidth-139,display.contentHeight-70);
+    --scene.view:insert(logo)
+    local dpad = display.newImage("dpad.png",10,display.contentHeight -70)
+  --  scene.view:insert(dpad)
+end
+
+--player setup
+function setupPlayer()
+   --     player = display.newImage("assets/art/RedRacer.png",(display.contentWidth/2)-(playerWidth/2),(display.contentHeight -70)-(playerHeight))
+  --      player.name = "Player"
+   --     scene.view:insert(player)
+end
+
+function setupDPad()
+    rectUp = display.newRect( 34, display.contentHeight-70, 23, 23)
+    rectUp:setFillColor(1,0,0)
+    rectUp.id ="up"
+    rectUp.isVisible = false;
+    rectUp.isHitTestable = true;
+    scene.view:insert(rectUp)
+ 
+    rectDown = display.newRect( 34,display.contentHeight-23, 23,23)
+    rectDown:setFillColor(1,0,0)
+    rectDown.id ="down"
+    rectDown.isVisible = false;
+    rectDown.isHitTestable = true;
+    scene.view:insert(rectDown)
+ 
+    rectLeft = display.newRect( 10,display.contentHeight-47,23, 23)
+    rectLeft:setFillColor(1,0,0)
+    rectLeft.id ="left"
+    rectLeft.isVisible = false;
+    rectLeft.isHitTestable = true;
+    scene.view:insert(rectLeft)
+ 
+    rectRight= display.newRect( 58,display.contentHeight-47, 23,23)
+    rectRight:setFillColor(1,0,0)
+    rectRight.id ="right"
+    rectRight.isVisible = false;
+    rectRight.isHitTestable = true;
+    scene.view:insert(rectRight)
+end
+function resetShipGrid()
+shipGrid = {}
+     for i=1, 11 do
+         table.insert(shipGrid,0)
+     end
+end
+
+function moveShip(event)
+    if event.phase == "began" then
+        if(event.target.id == "up") then
+          playerSpeedY = -playerMoveSpeed
+        end
+        if(event.target.id == "down") then
+          playerSpeedY = playerMoveSpeed
+        end
+        if(event.target.id == "left") then
+          playerSpeedX = -playerMoveSpeed
+        end
+        if(event.target.id == "right") then
+          playerSpeedX = playerMoveSpeed
+        end
+    elseif event.phase == "ended" then
+        playerSpeedX = 0
+        playerSpeedY = 0 
+   end
+end
+
+--sound generated system for ships
+--local shipSound = audio.loadStream("shipsound.mp3")
+--shipSoundChannel = audio.play( shipSound, {loops=-1} )
+
+function gameLoop()
+    --SNIP--
+   -- numberOfTicks = numberOfTicks + 1
+--    movePlayer()
+--    movePlayerBullets()
+--    checkPlayerBulletsOutOfBounds()
+--    moveFreeLifes()
+--    checkFreeLifesOutOfBounds()
+--    checkPlayerCollidesWithFreeLife()
+end
+
+--function movePlayer()
+--    player.x = player.x + playerSpeedX
+--    player.y = player.y + playerSpeedY
+--    if(player.x < 0) then
+--        player.x = 0
+--   end
+--   if(player.x > display.contentWidth - playerWidth) then
+--       player.x = display.contentWidth - playerWidth
+--   end
+--   if(player.y   < 0) then
+--       player.y = 0
+--  end
+--  if(player.y > display.contentHeight - 70- playerHeight) then
+--      player.y = display.contentHeight - 70 - playerHeight
+--  end
+--end
 
 function scene:create( event )
 	local sceneGroup = self.view
@@ -33,7 +154,7 @@ function scene:create( event )
 	-- e.g. add display objects to 'sceneGroup', add touch listeners, etc.
 
 	-- display a background image
-	local background = display.newImageRect( "background.jpg", display.contentWidth, display.contentHeight )
+	local background = display.newImageRect( "assets/background.jpg", display.contentWidth, display.contentHeight )
 	background.anchorX = 0
 	background.anchorY = 0
 	background.x, background.y = 0, 0
@@ -47,15 +168,22 @@ function scene:create( event )
 	playBtn = widget.newButton{
 		label="Start Demo",
 		labelColor = { default={255}, over={128} },
-		default="button.png",
-		over="button-over.png",
-		
+		default="assets/button.png",
+		over="assets/button-over.png",
+            
+
 		
 		
 		onRelease = onPlayBtnRelease	-- event listener function
 	}
 	playBtn.x = display.contentWidth*0.5
 	playBtn.y = display.contentHeight - 125
+    setupBackground()
+    setupGroups()
+    setupDisplay()
+    setupPlayer()
+    setupDPad()
+    resetShipGrid()
 
 --	slctBtn = widget.newButton{
 --		label="Select Ship",
@@ -88,6 +216,8 @@ function scene:show( event )
 		-- e.g. start timers, begin animation, play audio, etc.
 	end	
 end
+
+
 
 function scene:hide( event )
 	local sceneGroup = self.view
@@ -124,7 +254,11 @@ scene:addEventListener( "create", scene )
 scene:addEventListener( "show", scene )
 scene:addEventListener( "hide", scene )
 scene:addEventListener( "destroy", scene )
-
+--rectUp:addEventListener( "touch", moveShip)
+--rectDown:addEventListener( "touch", moveShip)
+--rectLeft:addEventListener( "touch", moveShip)
+--rectRight:addEventListener( "touch", moveShip)
+Runtime:addEventListener("enterFrame", gameLoop)
 -----------------------------------------------------------------------------------------
 
 return scene
