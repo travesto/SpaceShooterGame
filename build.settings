@@ -5,7 +5,7 @@ settings =
 	default = "landscape",
 	supported =
 	{
-	 "landscape"
+	 "landscapeRight", "landscapeLeft"
 	},
      },
 	iphone = 

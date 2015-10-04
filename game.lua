@@ -48,11 +48,11 @@ function scene:create( event )
 
     composer.isDebug = true
     
-    local background = display.newImageRect("blue.png", display.contentWidth, display.contentHeight)
+    local background = display.newImageRect("blue.png", display.contentWidth, display.contentHeight)--<PH>
     background.x = display.contentCenterX
     background.y = display.contentCenterY
-    local initText = display.newText("Galaxy", display.contentCenterX,display.contentCenterY - 200, "Conquest", 70,group)
-    local versionText = display.newText("Version 0.2 Build(031015)Development", 225, 750, "conquest",25, group)
+    local initText = display.newText("Galaxy", display.contentCenterX,display.contentCenterY - 200, "Conquest", 70,group) --<PH>
+    local versionText = display.newText("Version 0.2 Build(041015)Development", 225, 750, "conquest",25, group)
 
     initText:setFillColor(0,1,0)
     versionText:setFillColor(0,1,0)
