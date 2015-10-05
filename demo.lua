@@ -36,7 +36,7 @@ local numHit = 0
 local shipMoveX = 0
 local shipMoveY = 0
 local ship
-local speed =6
+local speed = 6
 local shootbtn
 local numEnemy = 0 
 local enemyArray = {}
@@ -70,9 +70,13 @@ local shot = audio.loadSound("laser.mp3")
 --local backgroundsnd = audio.loadStream ("")
 
 --background
-local background = display.newImageRect("blue.png", display.contentWidth, display.contentHeight) --<PH>
-background.x = display.contentCenterX
-background.y = display.contentCenterY
+local background1 = display.newImageRect("blue.png", display.contentWidth, display.contentHeight) --<PH>
+background1.x = 240
+background1.y = 160
+
+local background2 = display.newImageRect("blue.png", display.contentWidth, display.contentHeight) --<PH>
+background2.x = 760
+background2.y = 160
 
 
 --scoring
@@ -82,22 +86,27 @@ textBullets = display.newText("Bullets: "..numBullets, 35, 50, nil, 12)
 
 --gamepad
 local leftArrow = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark04")}})
-leftArrow.x = 80
-leftArrow.y = 700
+leftArrow.x = 50
+leftArrow.y = 300
 local rightArrow = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark05")}})
-rightArrow.x = 150
-rightArrow.y = 700
+rightArrow.x = 125
+rightArrow.y = 300
 local upArrow = display.newSprite(guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark02")}})
-upArrow.x = 115
-upArrow.y = 662
+upArrow.x = 88
+upArrow.y = 262
 local downArrow = display.newSprite(guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark09")}})
-downArrow.x = 115
-downArrow.y = 738
+downArrow.x = 88
+downArrow.y = 337
 
 -- --fire button
 -- shootbtn = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark35")}})
 -- shootbtn.x = display.contentWidth - 45
 -- shootbtn.y = display.contentHeight - 45
+
+local function update( event )
+updateBackgrounds()
+end
+
 
 --create gamepad
 local function stopShip(event)
@@ -113,6 +122,21 @@ local function moveShip(event)
 	ship.x = ship.x + shipMoveX
 	ship.y = ship.y + shipMoveY
 end
+
+function updateBackgrounds() -- gap between the individual screens :/
+background1.x = background1.x - (speed/5)
+	if(background1.x < -239) then
+	background1.x = 760
+	end
+	
+background2.x = background2.x - (speed/5)
+	if(background2.x < -239) then
+	background2.x = 760
+	end
+end
+
+timer.performWithDelay(1, update, -1)
+speed = speed + .05
 
 function leftArrowtouch()
 	shipMoveX = -speed
@@ -436,7 +460,8 @@ createAsteroid()
 -- backgroundMusic()
  
 -- shootbtn:addEventListener ( "tap", shoot:tap )
-background:addEventListener("tap", shoot)
+background1:addEventListener("tap", shoot)
+background2:addEventListener("tap", shoot)
 rightArrow:addEventListener ("touch", rightArrowtouch)
 leftArrow:addEventListener("touch", leftArrowtouch)
 upArrow:addEventListener("touch", upArrowtouch)

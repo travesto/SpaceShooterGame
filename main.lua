@@ -4,23 +4,88 @@
 --
 -----------------------------------------------------------------------------------------
 
---Display Settings
-display.setStatusBar(display.HiddenStatusBar)
+local composer = require( "composer" )
+local widget = require( "widget" )
+local ads = require( "ads" )
+local store = require( "store" )
+local gameNetwork = require("gameNetwork")
+local utility = require( "utility" )
+local myData = require( "mydata" )
+local device = require( "device" )
 
-display.setDefault( "anchorX", 0.5)
-display.setDefault( "anchorY", 0.5)
+display.setStatusBar( display.HiddenStatusBar )
 
---Seed Gen
-math.randomseed( os.time())
+math.randomseed( os.time() )
 
---required
-local gameData = require("gamedata")
-local composer = require("composer")
+if device.isAndroid then
+	widget.setTheme( "widget_theme_android_holo_light" )
+    store = require("plugin.google.iap.v3")
+end
 
---gameData Info
---gameData.invaderNum = 1
---gameData.maxLevels = 5
---gameData.rowsOfInvaders = 7
-gameData.asteroidNum = 6
+--
+-- Load saved in settings
+--
+myData.settings = utility.loadTable("settings.json")
+if myData.settings == nil then
+	myData.settings = {}
+	myData.settings.soundOn = true
+	myData.settings.musicOn = true
+    myData.settings.isPaid = false
+	myData.settings.currentLevel = 1
+	myData.settings.unlockedLevels = 20
+    myData.settings.bestScore = 0
+	myData.settings.levels = {}
+	utility.saveTable(myData.settings, "settings.json")
+end
+if myData.settings.bestScore == nil then
+    myData.settings.bestScore = 0
+end
 
-composer.gotoScene("game")
+
+local function onKeyEvent( event )
+
+    local phase = event.phase
+    local keyName = event.keyName
+    print( event.phase, event.keyName )
+
+    if ( "back" == keyName and phase == "up" ) then
+        if ( composer.getCurrentSceneName() == "menu" ) then
+            native.requestExit()
+        else
+            composer.gotoScene( "menu", { effect="crossFade", time=500 } )
+        end
+        return true
+    end
+    return false
+end
+
+--add the key callback
+if device.isAndroid then
+    Runtime:addEventListener( "key", onKeyEvent )
+end
+
+--
+-- handle system events
+--
+local function systemEvents(event)
+    print("systemEvent " .. event.type)
+    if event.type == "applicationSuspend" then
+        utility.saveTable( myData.settings, "settings.json" )
+    elseif event.type == "applicationResume" then
+        -- 
+        -- login to gameNetwork code here
+        --
+    elseif event.type == "applicationExit" then
+        utility.saveTable( myData.settings, "settings.json" )
+    elseif event.type == "applicationStart" then
+        --
+        -- Login to gameNetwork code here
+        --
+        --
+        -- Go to the menu
+        --
+        composer.gotoScene( "menu", { time = 250, effect = "fade" } )
+    end
+    return true
+end
+Runtime:addEventListener("system", systemEvents)

@@ -1,0 +1,43 @@
+<NotepadPlus>
+    <Project name="Galaxy">
+        <File name=".gitattributes" />
+        <File name=".gitignore" />
+        <File name="asteroids.lua" />
+        <File name="asteroids.png" />
+        <File name="blue.png" />
+        <File name="build.settings" />
+        <File name="config.lua" />
+        <File name="credits.lua" />
+        <File name="demo.lua" />
+        <File name="device.lua" />
+        <File name="enemy.lua" />
+        <File name="enemy.png" />
+        <File name="game.lua" />
+        <File name="gamedata.lua" />
+        <File name="gameover.lua" />
+        <File name="gui.lua" />
+        <File name="gui.png" />
+        <File name="ingameguii.lua" />
+        <File name="ingameguii.png" />
+        <File name="laser.lua" />
+        <File name="laser.mp3" />
+        <File name="laser.png" />
+        <File name="level.lua" />
+        <File name="level001.lua" />
+        <File name="main.lua" />
+        <File name="menu.lua" />
+        <File name="mydata.lua" />
+        <File name="nextlevel.lua" />
+        <File name="options.lua" />
+        <File name="player.lua" />
+        <File name="player.png" />
+        <File name="playerselect.lua" />
+        <File name="scene001.lua" />
+        <File name="TBTProject.config" />
+        <File name="TBTProject.luaproj" />
+        <File name="TBTProject.sln" />
+        <File name="template.lua" />
+        <File name="utility.lua" />
+        <File name="np++file.lua" />
+    </Project>
+</NotepadPlus>
