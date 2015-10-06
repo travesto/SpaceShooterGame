@@ -52,21 +52,21 @@ end
 --
 function scene:create( event )
     local sceneGroup = self.view
-
+	composer.removeScene("demo")
     params = event.params
         
     --
     -- setup a page background, really not that important though composer
     -- crashes out if there isn't a display object in the view.
     --
-    local background = display.newRect( 0, 0, 570, 360)
+    local background = display.newImageRect("blue.png", display.contentWidth, display.contentHeight)
     background.x = display.contentCenterX
     background.y = display.contentCenterY
-    background:setFillColor( 1 )
-    sceneGroup:insert(background)
+    sceneGroup:insert( background )
+    
 
     local gameOverText = display.newText("Game Over", 0, 0, native.systemFontBold, 32 )
-    gameOverText:setFillColor( 0 )
+    gameOverText:setFillColor( 0,1,0 )
     gameOverText.x = display.contentCenterX
     gameOverText.y = 50
     sceneGroup:insert(gameOverText)

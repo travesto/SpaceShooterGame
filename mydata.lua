@@ -3,6 +3,7 @@ M.maxLevels = 60
 M.maxShips = 4
 M.maxAsteroidSpawn = 8
 M.levelScore = 0
+M.asteroid = 8
 M.products = {}
 M.settings = {}
 M.settings.currentLevel = 1

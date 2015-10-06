@@ -67,50 +67,31 @@ for a = 1, 3, 1 do
     asteroid.isAlive = false
         
     
-    asteroid:insert(asteroids)
+    -- group:insert(asteroids)
 end
---create spikes
--- for a = 1, 3, 1 do
-    -- spike = display.newImage("spikeBlock.png")
-    -- spike.name = ("spike" .. a)
-    -- spike.id = a
-    -- spike.x = 900
-    -- spike.y = 500
-    -- spike.isAlive = false
-    -- spikes:insert(spike)
+
+
+
+-- function updateAsteroids()
+		-- for a =1, myData.asteroid, 1 do
+			-- if(asteroid[a].isAlive == true) then
+				-- (asteroid[a]):translate(speed * -1, 0)
+				-- if(asteroid[a].y > player.y) then
+					-- asteroid[a].y = asteroid[a].y -1
+				-- end
+				-- if(asteroid[a].y < player.y) then
+					-- asteroid[a].y = asteroid[a].y + 1
+				-- end	
+				-- if(asteroid[a].x < -80) then
+					-- asteroid[a].x = 800
+					-- asteroid[a].y = 600
+					-- asteroid[a].speed = 0
+					-- asteroid[a].isAlive = false;
+				-- end
+			-- end
+		-- end
+
 -- end
---create blasts
--- for a=1, 5, 1 do
-    -- blast = display.newImage("blast.png")
-    -- blast.name = ("blast" .. a)
-    -- blast.id = a
-    -- blast.x = 800
-    -- blast.y = 500
-    -- blast.isAlive = false
-    -- blasts:insert(blast)
--- end
-
-
-function updateAsteroids()
-		for a =1, asteroid.numChildren, 1 do
-			if(asteroid[a].isAlive == true) then
-				(asteroid[a]):translate(speed * -1, 0)
-				if(asteroid[a].y > player.y) then
-					asteroid[a].y = asteroid[a].y -1
-				end
-				if(asteroid[a].y < player.y) then
-					asteroid[a].y = asteroid[a].y + 1
-				end	
-				if(asteroid[a].x < -80) then
-					asteroid[a].x = 800
-					asteroid[a].y = 600
-					asteroid[a].speed = 0
-					asteroid[a].isAlive = false;
-				end
-			end
-		end
-
-end
 
 --scene functions
 function scene:create(event) --used for creating a scene thats never loaded, been removed or been removed from hidden
@@ -137,10 +118,10 @@ levelText.y = display.contentCenterY
 
 sceneGroup:insert(levelText)
 
-currentResource1Display = display.newText("100", display.contentWidth - 50, 10, native.systemFont, 16)
-currentResource2Display = display.newText("100", display.contentWidth - 50, 20, native.systemFont, 16)
-sceneGroup:insert(currentResource1Display)
-sceneGroup:insert(currentResource2Display)
+currentResource1Display = display.newText("Metal: ",  display.contentWidth - 100, 10, native.systemFont, 10)
+currentResource2Display = display.newText("Energy: ",  display.contentWidth - 100, 30, native.systemFont, 10)
+ sceneGroup:insert(currentResource1Display)
+ sceneGroup:insert(currentResource2Display)
 
 end
 --test systems
@@ -154,11 +135,14 @@ if event.phase == "did" then
 physics.start()
 physics.setGravity(0,0)
 transition.to (levelText, {time = 500, alpha = 0})
-spawnTimer = timer.performWithDelay(8000, function() asteroidSpawn(); end, 10)
+-- spawnTimer = timer.performWithDelay(8000, function() updateAsteroids(); end, 10)
 else
 currentResource1 = 100
 currentResource1Display.text = string.format ("%06d", currentResource1)
+currentResource2 = 100
+currentResource2Display.text = string.format ("%03d", currentResource2)
 end
+sceneGroup:insert(asteroids)
 end
 
 function scene:hide(event) --stop physics, timers, and audio

@@ -36,7 +36,7 @@ local numHit = 0
 local shipMoveX = 0
 local shipMoveY = 0
 local ship
-local speed = 6
+local speed = 2
 local shootbtn
 local numEnemy = 0 
 local enemyArray = {}
@@ -86,17 +86,22 @@ textBullets = display.newText("Bullets: "..numBullets, 35, 50, nil, 12)
 
 --gamepad
 local leftArrow = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark04")}})
-leftArrow.x = 50
+leftArrow.x = 48
 leftArrow.y = 300
+leftArrow:scale(0.5, 0.5)
 local rightArrow = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark05")}})
-rightArrow.x = 125
+rightArrow.x = 86
 rightArrow.y = 300
+rightArrow:scale(0.5, 0.5)
 local upArrow = display.newSprite(guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark02")}})
-upArrow.x = 88
-upArrow.y = 262
+upArrow.x = 67
+upArrow.y = 280
+upArrow:scale(0.5, 0.5)
 local downArrow = display.newSprite(guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark09")}})
-downArrow.x = 88
-downArrow.y = 337
+downArrow.x = 67
+downArrow.y = 320
+downArrow:scale(0.5, 0.5)
+
 
 -- --fire button
 -- shootbtn = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark35")}})
@@ -179,6 +184,7 @@ function createShip()
 	ship.y = display.contentCenterY
 	ship.rotation = 90
 	ship.myName = "ship"
+	ship:scale(0.5, 0.5)
 end
 
 --enemy maker
@@ -209,7 +215,7 @@ function createEnemy()
 					-- enemyArray.numBullets = 5
 
 					
-
+					enemyArray[numEnemy]:scale(0.5, 0.5)
 
 					 transition.to ( enemyArray[numEnemy] , {time = math.random (12000, 20000), x = ship.x +500, y= math.random (0, display.contentHeight)})
 					 enemies:insert(enemyArray[numEnemy])
@@ -247,7 +253,7 @@ end
    			bullet.name = 'bullet'
    			bullet.isBullet = true
    			
-    		
+    		bullet:scale(0.5, 0.5)
 			textBullets.text = "Bullets "..numBullets
 			
 
@@ -284,7 +290,7 @@ function createAsteroid()
 					asteroidTable[asteroidNum].x = startingX
 					asteroidTable[asteroidNum].y = startingY
 
-
+					asteroidTable[asteroidNum]:scale(0.5, 0.5)
 					
 
 					transition.to ( asteroidTable[asteroidNum] , {time = math.random (12000, 20000), x = ship.x +500, y= math.random (0, display.contentHeight)})
@@ -298,15 +304,17 @@ function onCollision(event)
 			
 			
 			local function setgameOver()
-			gameovertxt = display.newText(  "Game Over", display.contentCenterX-80, display.contentCenterY-100, nil , 50 )
-			gameovertxt:addEventListener("tap",  newGame)
+			composer.removeScene( "gameover", false )
+			composer.gotoScene( "gameover", { effect = "crossFade", time = 333 } )
+			
 			end
 			-- use setgameover after transition complete to avoid that user clicks gameover before the transition is completed
 			transition.to( ship, { time=1500, xScale = 0.4, yScale = 0.4, alpha=0, onComplete=setgameOver  } )
 			gameActive = false
 			removeEnemies()
 			audio.fadeOut(backgroundsnd)
-			audio.rewind (backgroundsnd)
+			display.remove()
+			
 			
 			
 	end	
