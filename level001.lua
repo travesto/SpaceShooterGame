@@ -13,19 +13,19 @@ local physics = require("physics")
 local myData = require("myData")
 
 --sprite sheets
-local asteroidSheetInfo = require("asteroids")
- local asteroidSheet = graphics.newImageSheet( "asteroids.png", asteroidSheetInfo:getSheet() )
-  local enemySheetInfo = require("enemy")
- local enemySheet = graphics.newImageSheet( "enemy.png", enemySheetInfo:getSheet() )
-  local laserSheetInfo = require("laser")
- local laserSheet = graphics.newImageSheet( "laser.png", laserSheetInfo:getSheet() )
-  local playerSheetInfo = require("player")
- local playerSheet = graphics.newImageSheet( "player.png", playerSheetInfo:getSheet() )
- local guiSheetInfo = require("ingameguii")
- local guiSheet = graphics.newImageSheet("ingameguii.png", guiSheetInfo:getSheet())
+local asteroidSheetInfo = require("assets.images.asteroids")
+ local asteroidSheet = graphics.newImageSheet( "assets/images/asteroids.png", asteroidSheetInfo:getSheet() )
+  local enemySheetInfo = require("assets.images.enemy")
+ local enemySheet = graphics.newImageSheet( "assets/images/enemy.png", enemySheetInfo:getSheet() )
+  local laserSheetInfo = require("assets.images.laser")
+ local laserSheet = graphics.newImageSheet( "assets/images.laser.png", laserSheetInfo:getSheet() )
+  local playerSheetInfo = require("assets.images.player")
+ local playerSheet = graphics.newImageSheet( "assets/images/player.png", playerSheetInfo:getSheet() )
+ local guiSheetInfo = require("assets.images.ingameguii")
+ local guiSheet = graphics.newImageSheet("assets/images/ingameguii.png", guiSheetInfo:getSheet())
  
  --audio
- local shot = audio.loadSound("laser.mp3")
+ local shot = audio.loadSound("assets/sounds/laser.mp3")
 --local backgroundsnd = audio.loadStream ("")
 
 --local vars here
@@ -105,7 +105,7 @@ local thisLevel = myData.settings.currentLevel
 
 --obj go here
 
- local background = display.newImageRect("blue.png", display.contentWidth, display.contentHeight)
+ local background = display.newImageRect("assets/images/blue.png", display.contentWidth, display.contentHeight)
     background.x = display.contentCenterX
     background.y = display.contentCenterY
     sceneGroup:insert( background )

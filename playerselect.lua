@@ -9,8 +9,8 @@ local params
 
 --local sprite sheet
 
- local playerSheetInfo = require("player")
- local playerSheet = graphics.newImageSheet( "player.png", playerSheetInfo:getSheet() )
+ local playerSheetInfo = require("assets.images.player")
+ local playerSheet = graphics.newImageSheet( "assets/images/player.png", playerSheetInfo:getSheet() )
 
 local function handleButtonEvent( event )
 
@@ -41,7 +41,7 @@ function scene:create( event )
     -- setup a page background, really not that important though composer
     -- crashes out if there isn't a display object in the view.
     --
-   local background = display.newImageRect("blue.png", display.contentWidth, display.contentHeight)
+   local background = display.newImageRect("assets/images/blue.png", display.contentWidth, display.contentHeight)
     background.x = display.contentCenterX
     background.y = display.contentCenterY
     sceneGroup:insert( background )
