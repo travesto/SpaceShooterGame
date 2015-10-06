@@ -8,16 +8,16 @@ local cHeight = display.contentCenterY
 local scene = composer.newScene()
 
 --sprite sheets
- local asteroidSheetInfo = require("asteroids")
- local asteroidSheet = graphics.newImageSheet( "asteroids.png", asteroidSheetInfo:getSheet() )
-  local enemySheetInfo = require("enemy")
- local enemySheet = graphics.newImageSheet( "enemy.png", enemySheetInfo:getSheet() )
-  local laserSheetInfo = require("laser")
- local laserSheet = graphics.newImageSheet( "laser.png", laserSheetInfo:getSheet() )
-  local playerSheetInfo = require("player")
- local playerSheet = graphics.newImageSheet( "player.png", playerSheetInfo:getSheet() )
- local guiSheetInfo = require("ingameguii")
- local guiSheet = graphics.newImageSheet("ingameguii.png", guiSheetInfo:getSheet())
+local asteroidSheetInfo = require("assets.images.asteroids")
+local asteroidSheet = graphics.newImageSheet( "assets/images/asteroids.png", asteroidSheetInfo:getSheet() )
+local enemySheetInfo = require("assets.images.enemy")
+local enemySheet = graphics.newImageSheet( "assets/images/enemy.png", enemySheetInfo:getSheet() )
+local laserSheetInfo = require("assets.images.laser")
+local laserSheet = graphics.newImageSheet( "assets/images.laser.png", laserSheetInfo:getSheet() )
+local playerSheetInfo = require("assets.images.player")
+local playerSheet = graphics.newImageSheet( "assets/images/player.png", playerSheetInfo:getSheet() )
+local guiSheetInfo = require("assets.images.ingameguii")
+local guiSheet = graphics.newImageSheet("assets/images/ingameguii.png", guiSheetInfo:getSheet())
 
 
 --physics
@@ -66,15 +66,15 @@ local backgroundMusic
 local createAsteroid
 
 --audio
-local shot = audio.loadSound("laser.mp3")
+local shot = audio.loadSound("assets/sounds/laser.mp3")
 --local backgroundsnd = audio.loadStream ("")
 
 --background
-local background1 = display.newImageRect("blue.png", display.contentWidth, display.contentHeight) --<PH>
+local background1 = display.newImageRect("assets/images/blue.png", display.contentWidth, display.contentHeight) --<PH>
 background1.x = 240
 background1.y = 160
 
-local background2 = display.newImageRect("blue.png", display.contentWidth, display.contentHeight) --<PH>
+local background2 = display.newImageRect("assets/images/blue.png", display.contentWidth, display.contentHeight) --<PH>
 background2.x = 760
 background2.y = 160
 
