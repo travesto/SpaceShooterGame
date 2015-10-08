@@ -170,7 +170,7 @@ end
 ----------------------------------------------
 --ship maker
 function createShip()
-	ship = display.newImage("assets/images/playerShip1_red.png")
+	ship = display.newImage("assets/images/playerShip2_green.png")
 	physics.addBody(ship, "static", {density = 1, friction = 0, bounce = 0});
 	ship.x = 70
 	ship.y = display.contentCenterY

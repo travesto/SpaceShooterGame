@@ -1,3 +1,10 @@
+--This scene will also show potential upgrades for the player to use
+--for the next levels and will stay persistent through the levels till
+--player is defeated. Since there is not a save game that sticks after
+--game over.
+
+
+
 local composer = require( "composer" )
 local scene = composer.newScene()
 

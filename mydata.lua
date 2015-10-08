@@ -1,5 +1,5 @@
 M = {}
-M.maxLevels = 60
+M.maxLevels = 50
 M.maxShips = 4
 M.maxAsteroidSpawn = 8
 M.levelScore = 0

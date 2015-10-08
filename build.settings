@@ -49,6 +49,11 @@ settings =
             publisherId = "com.coronalabs",
             supportedPlatforms = { iphone=true, ["iphone-sim"]=true },
         },
+		
+		["plugin.bit"] = 
+		{
+			publisherId = "com.coronalabs"
+		},
     },
     iphone =
     {

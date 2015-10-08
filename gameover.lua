@@ -92,6 +92,9 @@ function scene:create( event )
     doneButton.x = display.contentCenterX
     doneButton.y = display.contentHeight - 40
     sceneGroup:insert( doneButton )
+	
+	myData.settings.currentLevel = 1
+    utility.saveTable(myData.settings, "settings.json")
 end
 
 function scene:show( event )

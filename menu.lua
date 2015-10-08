@@ -48,7 +48,7 @@ function scene:create( event )
     -- setup a page background, really not that important though composer
     -- crashes out if there isn't a display object in the view.
     --
-    local background = display.newImageRect("assets/images/blue.png", display.contentWidth, display.contentHeight)
+    local background = display.newImageRect("assets/images/blue.png", display.contentWidth, display.contentHeight) -- <PH> will be replaced by Sunday the 11th
     background.x = display.contentCenterX
     background.y = display.contentCenterY
     sceneGroup:insert( background )
@@ -58,8 +58,8 @@ function scene:create( event )
     title.y = 40
     title:setFillColor( 0,1,0 )
     sceneGroup:insert( title )
-	
-	local versionText = display.newText("Version 0.3 Build (051015)Development", 12, 12, native.systemFont, 8)
+	---------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local versionText = display.newText("Version 0.3 Build (071015)Development", 12, 12, native.systemFont, 8)
 	versionText.x = 75
 	versionText.y = 350
 	versionText:setFillColor(0,1,0)
