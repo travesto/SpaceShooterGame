@@ -24,6 +24,7 @@ local guiSheet = graphics.newImageSheet("assets/images/ingameguii.png", guiSheet
 local physics = require ("physics")
 physics.start()
 physics.setGravity (0,0)
+physics.setDebugErrorsEnabled( enabled ) --physics and colliders debug
 
 --groupings
 local enemies = display.newGroup()
@@ -150,6 +151,10 @@ function shootBtntouch()
 	shoot()
 end
 
+function ultBtntouch()
+
+end
+
 local function createWalls(event)
 	if ship.x < 0 then
 		ship.x = 0
@@ -172,6 +177,7 @@ end
 function createShip()
 	ship = display.newImage("assets/images/playerShip1_red.png")
 	physics.addBody(ship, "static", {density = 1, friction = 0, bounce = 0});
+	physics.setScale(15)
 	ship.x = 70
 	ship.y = display.contentCenterY
 	ship.rotation = 90
@@ -225,9 +231,10 @@ end
     		bullet.y = ship.y
     		bullet.rotation = ship.rotation
 			bullet.gravityScale = 0
-   			bullet.name = 'bullet'
-   			bullet.isBullet = true
-			bullet.isSensor = true
+   			bullet.name = "bullet"
+   			bullet.isSensor = true
+			bullet.isBullet = true
+			
 			canFireBullet = false
 			audio.play(shot)
    			
@@ -252,34 +259,35 @@ end
 	end
 
 --asteroid
--- function createAsteroid()
-	-- asteroidNum = asteroidNum +1
-	-- print(asteroidNum)
-					-- asteroids:toFront()
-					-- asteroidTable[asteroidNum] = display.newSprite( asteroidSheet , {frames={asteroidSheetInfo:getFrameIndex("meteorGrey_big2")}}) --<PH>
-					-- physics.addBody(asteroidTable[asteroidNum] , {density= 0.5, friction = 0, bounce = 0 })
-					-- asteroidTable[asteroidNum].myName = "asteroid"
-					-- local startingPosition = math.random(1,3)
-					-- if (startingPosition == 1) then
-						-- startingX = display.contentWidth + 10
-						-- startyingY = math.random(0, display.contentHeight)
-					-- elseif(startingPosition == 2)then
-						-- startingX = math.random(0, display.contentWidth)
-						-- startingY = -10
-					-- else
-						-- startingX = math.random(0, display.contentWidth)
-						-- startingY = display.contentHeight +10
-					-- end
+function createAsteroid()
+	asteroidNum = asteroidNum +1
+	print(asteroidNum)
+					asteroids:toFront()
+					asteroidTable[asteroidNum] = display.newSprite( asteroidSheet , {frames={asteroidSheetInfo:getFrameIndex("meteorGrey_big2")}}) --<PH>
+					physics.addBody(asteroidTable[asteroidNum], "dynamic" , {density= 0.5, friction = 0, bounce = 0 })
+					physics.setScale(15)
+					asteroidTable[asteroidNum].myName = "asteroid"
+					local startingPosition = math.random(1,3)
+					if (startingPosition == 1) then
+						startingX = display.contentWidth + 10
+						startyingY = math.random(0, display.contentHeight)
+					elseif(startingPosition == 2)then
+						startingX = math.random(0, display.contentWidth)
+						startingY = -10
+					else
+						startingX = math.random(0, display.contentWidth)
+						startingY = display.contentHeight +10
+					end
 
-					-- asteroidTable[asteroidNum].x = startingX
-					-- asteroidTable[asteroidNum].y = startingY
+					asteroidTable[asteroidNum].x = startingX
+					asteroidTable[asteroidNum].y = startingY
 
-					-- asteroidTable[asteroidNum]:scale(0.5, 0.5)
+					asteroidTable[asteroidNum]:scale(0.5, 0.5)
 					
 
-					-- transition.to ( asteroidTable[asteroidNum] , {time = math.random (12000, 20000), x = ship.x +500, y= math.random (0, display.contentHeight)})
-					-- asteroids:insert(asteroidTable[asteroidNum])
--- end
+					transition.to ( asteroidTable[asteroidNum] , {time = math.random (12000, 20000), x = ship.x +500, y= math.random (0, display.contentHeight)})
+					asteroids:insert(asteroidTable[asteroidNum])
+end
 
 
 --collisions
@@ -298,51 +306,25 @@ function onCollision(event)
 			removeEnemies()
 			audio.fadeOut(backgroundsnd)
 			display.remove()
+	end
+	
+	if(event.object1.name == "bullet" and event.object2.name == "asteroid") then
+		display.remove(event.object2)
+		alloy = alloy + math.random(5)
+			
+	end	
+	
+		
 			
 			
 			
 	end	
 	
-	if(event.object1.myName =="ship" and event.object2.myName =="ammo") then
-		local function sizeBack()
-		ship.xScale = 1.0
-		ship.yScale = 1.0 
-		end
-		transition.to( ship, { time=500, xScale = 1.2, yScale = 1.2, onComplete = sizeBack  } )
-		numBullets = numBullets + 3 
-		textBullets.text = "Bullets "..numBullets
-		event.object2:removeSelf()
-		event.object2.myName=nil
-		timer.cancel(rotationTimer)
-		audio.play(ammosnd)
-		
-	end
+
  
-	if((event.object1.myName=="enemy" and event.object2.myName=="bullet") or 
-		(event.object1.myName=="bullet" and event.object2.myName=="enemy")) then
-			event.object1:removeSelf()
-			event.object1.myName=nil
-			event.object2:removeSelf()
-			event.object2.myName=nil
-			score = score + 10
-			textScore.text = "Score: "..score
-			numHit = numHit + 1
-			print ("numhit "..numHit)
-			end
-	if((event.object1.myName=="asteroid" and event.object2.myName== "bullet")or
-		(event.object1.myName=="bullet" and event.object2.myName=="asteroid"))then
-		event.object1:removeSelf()
-		event.object1.myName=nil
-		event.object2:removeSelf()
-		event.object2.myName=nil
-		score = score + 5
-		textScore.text = "Score: "..score
-		numHit = numHit + 1
-		print("numhit "..numHit)
-	end
 
 	
-end
+
 
 --remove the dead ones
 -- function removeEnemies()
@@ -355,14 +337,14 @@ end
 -- end
 
 --remove destroyed asteroid
--- function removeAsteroid()
-	-- for i = 1, #asteroidTable do
-		-- if( asteroidTable[i].myName~= nil) then
-			-- asteroidTable[i]:removeSelf()
-			-- asteroidTable[i].myName = nil
-		-- end
-	-- end
--- end
+function removeAsteroid()
+	for i = 1, #asteroidTable do
+		if( asteroidTable[i].myName~= nil) then
+			asteroidTable[i]:removeSelf()
+			asteroidTable[i].myName = nil
+		end
+	end
+end
 
 
 
@@ -403,7 +385,7 @@ end
 -- heart of the game
 function startGame()
 createShip()
--- createAsteroid()
+createAsteroid()
 
 -- backgroundMusic()
  
