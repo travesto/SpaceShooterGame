@@ -82,7 +82,7 @@ function scene:create( event )
     selectLevelText.y = 50
     sceneGroup:insert(selectLevelText)
 	
-	local versionText = display.newText("Version 0.3 Build (071015)Development", 12, 12, native.systemFont, 8)
+	local versionText = display.newText("Version 0.4 Build (071015)Development", 12, 12, native.systemFont, 8)
 	versionText.x = 75
 	versionText.y = 350
 	versionText:setFillColor(0,1,0)

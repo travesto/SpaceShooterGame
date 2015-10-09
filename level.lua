@@ -416,7 +416,7 @@ end
 function scene:show(event)
     local phase = event.phase
     local previousScene = composer.getSceneName("previous")
-  a  composer.removeScene(previousScene)
+	composer.removeScene(previousScene)
     local group = self.view
     if (phase == "did") then
         Runtime:addEventListener("enterFrame", gameLoop)
