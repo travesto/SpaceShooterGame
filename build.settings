@@ -116,13 +116,13 @@ settings =
                 }, 
                 { -- iPad / iPad Retina
                     ["UILaunchImageMinimumOSVersion"] = "7.0",
-                    ["UILaunchImageName"] = "Default-Landscape",
+                    ["UILaunchImageName"] = "iPad-Spash.png",
                     ["UILaunchImageOrientation"] = "LandscapeLeft",
                     ["UILaunchImageSize"] = "{768, 1024}" 
                 },
                 { -- iPad / iPad Retina
                     ["UILaunchImageMinimumOSVersion"] = "7.0",
-                    ["UILaunchImageName"] = "Default-Landscape",
+                    ["UILaunchImageName"] = "iPad-Splash.png",
                     ["UILaunchImageOrientation"] = "LandscapeRight",
                     ["UILaunchImageSize"] = "{768, 1024}" 
                 }, 
@@ -134,13 +134,13 @@ settings =
                 },
                 {  --iPhone 6 LandscapeLeft
                     ["UILaunchImageMinimumOSVersion"] = "8.0",
-                    ["UILaunchImageName"] = "Default-667h",
+                    ["UILaunchImageName"] = "assets/images/iPhone6-Splash.png",
                     ["UILaunchImageOrientation"] = "LandscapeLeft",
                     ["UILaunchImageSize"] = "{375, 667}"
                 },
                 {  --iPhone 6 LandscapeRight
                     ["UILaunchImageMinimumOSVersion"] = "8.0",
-                    ["UILaunchImageName"] = "Default-667h",
+                    ["UILaunchImageName"] = "assets/images/iPhone6-Splash.png",
                     ["UILaunchImageOrientation"] = "LandscapeRight",
                     ["UILaunchImageSize"] = "{375, 667}"
                 },

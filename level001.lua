@@ -3,7 +3,7 @@ local composer = require("composer")
 composer.isDebug = true --for debuging only set to false before release builds
 local cWidth = display.contentCenterX
 local cHeight = display.contentCenterY
-
+local dusk = require("Dusk.dusk")
 --scene starter
 local scene = composer.newScene()
 
@@ -75,7 +75,7 @@ local background = display.newImageRect("assets/images/level001wip.png", display
     background.x = display.contentCenterX
     background.y = display.contentCenterY
     
-
+dusk.loadMap("level001 wip.json")
 
 --debugging for scoring
 
@@ -188,49 +188,88 @@ function createShip()
 	ship.rotation = 90
 	ship.myName = "ship"
 	ship:scale(0.5, 0.5)
+
+	--destroyed
+	ship.collision = function(self, event)
+						if(event.phase == "began" and event.other.name == "asteroid") then
+							ship = nil
+							display.remove(self)
+							display.remove(other)
+
+							composer.destroyScene(gameover)
+							composer.goToScene(gameover)
+						end
+					end
+
+					ship:addEventListener("collision", ship)
+
 	
 	
 end
 
 --enemy maker
--- function createEnemy()
-	--local enemyCollisionFilter = { categoryBits = 4, maskBits = 15}
-	-- numEnemy = numEnemy +1
-	-- print(numEnemy)
-					-- enemies:toFront()
-					-- enemyArray[numEnemy] = display.newSprite( enemySheet , {frames={enemySheetInfo:getFrameIndex("enemyBlue5")}}) --<PH>
-					-- physics.addBody(enemyArray[numEnemy] , {filter = enemyCollisionFilter })
-					-- enemyArray[numEnemy].myName = "enemy"
-					-- local startingPosition = math.random(1,3)
-					-- if (startingPosition == 1) then
-						-- startingX = display.contentWidth + 10
-						-- startyingY = math.random(0, display.contentHeight)
-					-- elseif(startingPosition == 2)then
-						-- startingX = math.random(0, display.contentWidth)
-						-- startingY = -10
-					-- else
-						-- startingX = math.random(0, display.contentWidth)
-						-- startingY = display.contentHeight +10
-					-- end
+function createEnemy()
+	local enemyCollisionFilter = { categoryBits = 4, maskBits = 15}
+	numEnemy = numEnemy +1
+	print(numEnemy)
+					enemies:toFront()
+					enemyArray[numEnemy] = display.newSprite( enemySheet , {frames={enemySheetInfo:getFrameIndex("enemyBlue5")}}) --<PH>
+					physics.addBody(enemyArray[numEnemy] , {filter = enemyCollisionFilter })
+					physics.setScale(15)
+					enemyArray[numEnemy].myName = "enemy"
+					local startingPosition = math.random(1,3)
+					if (startingPosition == 1) then
+						startingX = display.contentWidth - 50
+						startyingY = math.random(0, display.contentHeight)
+					elseif(startingPosition == 2)then
+						startingX = math.random(0, display.contentWidth)
+						startingY = -10
+					else
+						startingX = math.random(0, display.contentWidth)
+						startingY = display.contentHeight - 50
+					end
 
-					-- enemyArray[numEnemy].x = startingX
-					-- enemyArray[numEnemy].y = startingY
+					enemyArray[numEnemy].x = startingX
+					enemyArray[numEnemy].y = startingY
 
-					-- -- enemyArray[numEnemy] .y = startlocationY
-					-- -- enemyArray.rotation = 180 --not working as intended
-					-- -- enemyArray.numBullets = 5
+					-- enemyArray[numEnemy] .y = startlocationY
+					-- enemyArray.rotation = 180 --not working as intended
+					-- enemyArray.numBullets = 5
 
 					
-					-- enemyArray[numEnemy]:scale(0.5, 0.5)
+					enemyArray[numEnemy]:scale(0.5, 0.5)
 
-					 -- transition.to ( enemyArray[numEnemy] , {time = math.random (12000, 20000), x = ship.x +500, y= math.random (0, display.contentHeight)})
-					 -- enemies:insert(enemyArray[numEnemy])
--- end
+					 transition.to ( enemyArray[numEnemy] , {time = math.random (12000, 20000), x = ship.x +500, y= math.random (0, display.contentHeight)})
+					 enemies:insert(enemyArray[numEnemy])
+
+					 enemyArray[numEnemy].collision = function(self, event)
+						if(event.phase == "began" and event.other.name == "bullet") then
+							enemyArray[numEnemy] = nil
+							display.remove(self)
+							display.remove(other)
+						
+							-- score update
+							
+							alloy = alloy + math.random(20)
+							alloyNum = display.newText ("Alloy: ".. alloy, 15, 5, nil, 8 )
+							print("Alloy number ", alloy)
+						
+						
+						end
+						return true
+						end
+						
+					enemyArray[numEnemy]:addEventListener("collision", enemy)
+
+
+
+
+end
 
 
 
 --shoot to kill yeah?
-	function shoot(event)
+	function shoot(tap, event)
 		
 		if(canFireBullet == true) then
 			--bullet colliders
@@ -272,7 +311,7 @@ end
 function createAsteroid()
 	
 	local asteroidCollisionFilter = { categoryBits = 2, maskBits = 15}
-	asteroidNum = asteroidNum +1
+	asteroidNum = asteroidNum + 1
 	print(asteroidNum)
 					asteroids:toFront()
 					asteroidTable[asteroidNum] = display.newSprite( asteroidSheet , {frames={asteroidSheetInfo:getFrameIndex("meteorGrey_big2")}}) --<PH>
@@ -282,14 +321,14 @@ function createAsteroid()
 					asteroidTable[asteroidNum].myName = "asteroid"
 					local startingPosition = math.random(1,3)
 					if (startingPosition == 1) then
-						startingX = display.contentWidth + 10
+						startingX = display.contentWidth - 50
 						startyingY = math.random(0, display.contentHeight)
 					elseif(startingPosition == 2)then
 						startingX = math.random(0, display.contentWidth)
 						startingY = -10
 					else
 						startingX = math.random(0, display.contentWidth)
-						startingY = display.contentHeight +10
+						startingY = display.contentHeight - 50
 					end
 
 					asteroidTable[asteroidNum].x = startingX
@@ -311,7 +350,7 @@ function createAsteroid()
 							
 							alloy = alloy + math.random(5)
 							alloyNum = display.newText ("Alloy: ".. alloy, 15, 5, nil, 8 )
-							print(alloy)
+							print("Alloy number ", alloy)
 						
 						
 						end
@@ -393,12 +432,13 @@ end
 function startGame()
 createShip()
 createAsteroid()
+createEnemy()
 
 -- backgroundMusic()
  
 -- shootbtn:addEventListener ( "tap", shoot:tap )
 
-shootbtn:addEventListener("touch", shootBtntouch)
+shootbtn:addEventListener("tap", shootBtntouch)
 rightArrow:addEventListener ("touch", rightArrowtouch)
 leftArrow:addEventListener("touch", leftArrowtouch)
 upArrow:addEventListener("touch", upArrowtouch)

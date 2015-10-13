@@ -15,6 +15,50 @@ local device = require( "device" )
 
 display.setStatusBar( display.HiddenStatusBar )
 
+
+centerX = display.contentWidth / 2
+centerY = display.contentHeight / 2
+withScrn = display.contentWidth
+heightScrn = display.contentHeight
+topScrn = display.screenOriginY
+leftScrn = display.screenOriginX
+-- defintion of the background
+backgroundfill = display.newRect(leftScrn, topScrn, withScrn, heightScrn)
+-- only the splash screen has a white background
+backgroundfill:setFillColor(255,255,255)
+ 
+ 
+
+ 
+local splash = display.newImage ("assets/images/iPad-Splash.png")
+splash.x = centerX
+splash.y = centerY
+splash.scale = (1.5)
+ 
+local function endSplash ()
+ 
+    splash:removeSelf()
+    splash = nil
+ 
+    -- set default background color for the game
+    gradient = graphics.newGradient(
+    { 80, 211, 255 },
+    {80, 100, 180 },
+    "up" )
+    backgroundfill:setFillColor(gradient)
+    composer.gotoScene ( "menu", { effect = "zoomOutIn"} )
+end 
+ 
+timer.performWithDelay(2000, endSplash)
+
+
+
+
+
+
+
+
+
 math.randomseed( os.time() )
 
 if device.isAndroid then

@@ -43,7 +43,10 @@ function scene:create( event )
     local sceneGroup = self.view
 
     params = event.params
-        
+     
+  
+    
+
     --
     -- setup a page background, really not that important though composer
     -- crashes out if there isn't a display object in the view.
