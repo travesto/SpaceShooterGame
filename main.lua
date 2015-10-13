@@ -22,18 +22,15 @@ withScrn = display.contentWidth
 heightScrn = display.contentHeight
 topScrn = display.screenOriginY
 leftScrn = display.screenOriginX
--- defintion of the background
-backgroundfill = display.newRect(leftScrn, topScrn, withScrn, heightScrn)
--- only the splash screen has a white background
-backgroundfill:setFillColor(255,255,255)
+
  
  
 
  
-local splash = display.newImage ("assets/images/iPad-Splash.png")
+local splash = display.newImage ("assets/images/iPad-Splashv33.png")
 splash.x = centerX
 splash.y = centerY
-splash.scale = (1.5)
+
  
 local function endSplash ()
  
@@ -45,11 +42,11 @@ local function endSplash ()
     { 80, 211, 255 },
     {80, 100, 180 },
     "up" )
-    backgroundfill:setFillColor(gradient)
+ 
     composer.gotoScene ( "menu", { effect = "zoomOutIn"} )
 end 
  
-timer.performWithDelay(2000, endSplash)
+timer.performWithDelay(5000, endSplash)
 
 
 

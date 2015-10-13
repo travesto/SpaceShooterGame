@@ -9,6 +9,8 @@ local params
 
 local myData = require( "mydata" )
 
+
+
 local function handlePlayButtonEvent( event )
     if ( "ended" == event.phase ) then
         composer.removeScene( "playerselect", false )
@@ -43,15 +45,13 @@ function scene:create( event )
     local sceneGroup = self.view
 
     params = event.params
-     
-  
-    
+ 
 
     --
     -- setup a page background, really not that important though composer
     -- crashes out if there isn't a display object in the view.
     --
-    local background = display.newImageRect("assets/images/blue.png", display.contentWidth, display.contentHeight) -- <PH> will be replaced by Sunday the 11th
+    local background = display.newImageRect("assets/images/blue.png", display.contentWidth, display.contentHeight)
     background.x = display.contentCenterX
     background.y = display.contentCenterY
     sceneGroup:insert( background )
@@ -62,7 +62,7 @@ function scene:create( event )
     title:setFillColor( 0,1,0 )
     sceneGroup:insert( title )
 	---------------------------------------------------------------------------------------------------------------------------------------------------------------
-	local versionText = display.newText("Version 0.4 Build (071015)Development", 12, 12, native.systemFont, 8)
+	local versionText = display.newText("Version 0.4 Build (131015)Development", 12, 12, native.systemFont, 8)
 	versionText.x = 75
 	versionText.y = 350
 	versionText:setFillColor(0,1,0)
@@ -77,7 +77,7 @@ function scene:create( event )
         onEvent = handlePlayButtonEvent
     })
     playButton.x = display.contentCenterX
-    playButton.y = display.contentCenterY - 90
+    playButton.y = display.contentCenterY - 10
     sceneGroup:insert( playButton )
 
     -- Create the widget
@@ -89,7 +89,7 @@ function scene:create( event )
         onEvent = handleSettingsButtonEvent
     })
     settingsButton.x = display.contentCenterX
-    settingsButton.y = display.contentCenterY - 30
+    settingsButton.y = display.contentCenterY + 50
     sceneGroup:insert( settingsButton )
 
     -- -- Create the widget
@@ -105,16 +105,16 @@ function scene:create( event )
     -- sceneGroup:insert( helpButton )
 
     -- Create the widget
-    local creditsButton = widget.newButton({
-        id = "button4",
-        label = "Credits",
-        width = 100,
-        height = 32,
-        onEvent = handleCreditsButtonEvent
-    })
-    creditsButton.x = display.contentCenterX
-    creditsButton.y = display.contentCenterY + 90
-    sceneGroup:insert( creditsButton )
+    -- local creditsButton = widget.newButton({
+        -- id = "button4",
+        -- label = "Credits",
+        -- width = 100,
+        -- height = 32,
+        -- onEvent = handleCreditsButtonEvent
+    -- })
+    -- creditsButton.x = display.contentCenterX
+    -- creditsButton.y = display.contentCenterY + 90
+    -- sceneGroup:insert( creditsButton )
 
 end
 
