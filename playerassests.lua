@@ -1,5 +1,6 @@
 -- create player assests for three player ships.
---I guess that means make ships move, shoot, etc.
+--This should create a scroll able view of selectable ships.
+--"I've only proved that it is correct, not that it works" - DEK
 -- Use placeholder images.
 
 local composer = require( "composer" )
