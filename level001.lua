@@ -77,10 +77,12 @@ local background = display.newImageRect("assets/images/level001wip.png", display
     
 
 
+--debugging for scoring
+
 --scoring
-textScore = display.newText("Alloy: ".. alloy, 15, 5, nil, 8)
-textWave = display.newText("Energy: ".. energy, 22, 15, nil, 8)
-textBullets = display.newText("Level: "..levelProgress, 15, 25, nil, 8)
+alloyNum = display.newText("Alloy: ".. alloy, 15, 5, nil, 8)
+waveNum = display.newText("Energy: ".. energy, 22, 15, nil, 8)
+levelNum = display.newText("Level: "..levelProgress, 15, 25, nil, 8)
 
 --gamepad
 local leftArrow = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark04")}})
@@ -176,23 +178,28 @@ end
 ----------------------------------------------
 --ship maker
 function createShip()
+	--collisions inside function for player
+	local playerCollisionFilter = { categoryBits=1, maskBits = 6}
 	ship = display.newImage("assets/images/playerShip1_red.png")
-	physics.addBody(ship, "static", {density = 1, friction = 0, bounce = 0});
+	physics.addBody( ship, {filter = playerCollisionFilter } )
 	physics.setScale(15)
 	ship.x = 70
 	ship.y = display.contentCenterY
 	ship.rotation = 90
 	ship.myName = "ship"
 	ship:scale(0.5, 0.5)
+	
+	
 end
 
 --enemy maker
 -- function createEnemy()
+	--local enemyCollisionFilter = { categoryBits = 4, maskBits = 15}
 	-- numEnemy = numEnemy +1
 	-- print(numEnemy)
 					-- enemies:toFront()
 					-- enemyArray[numEnemy] = display.newSprite( enemySheet , {frames={enemySheetInfo:getFrameIndex("enemyBlue5")}}) --<PH>
-					-- physics.addBody(enemyArray[numEnemy] , {density= 0.5, friction = 0, bounce = 0 })
+					-- physics.addBody(enemyArray[numEnemy] , {filter = enemyCollisionFilter })
 					-- enemyArray[numEnemy].myName = "enemy"
 					-- local startingPosition = math.random(1,3)
 					-- if (startingPosition == 1) then
@@ -226,8 +233,10 @@ end
 	function shoot(event)
 		
 		if(canFireBullet == true) then
+			--bullet colliders
+			local bulletCollisionFilter = { categoryBits=8, maskBits = 6}
 			local bullet = display.newSprite( laserSheet , {frames={laserSheetInfo:getFrameIndex("laserBlue04")}})
-			physics.addBody(bullet, "static", {density = 1, friction = 0, bounce = 0});
+			physics.addBody(bullet, {filter = bulletCollisionFilter});
 			bullet.x = ship.x + 40
     		bullet.y = ship.y
     		bullet.rotation = ship.rotation
@@ -261,11 +270,13 @@ end
 
 --asteroid
 function createAsteroid()
+	
+	local asteroidCollisionFilter = { categoryBits = 2, maskBits = 15}
 	asteroidNum = asteroidNum +1
 	print(asteroidNum)
 					asteroids:toFront()
 					asteroidTable[asteroidNum] = display.newSprite( asteroidSheet , {frames={asteroidSheetInfo:getFrameIndex("meteorGrey_big2")}}) --<PH>
-					physics.addBody(asteroidTable[asteroidNum], {density= 0.5, friction = 0, bounce = 0 })
+					physics.addBody(asteroidTable[asteroidNum], {filter = asteroidCollisionFilter })
 					physics.setScale(15)
 					asteroidTable.class = "asteroid"
 					asteroidTable[asteroidNum].myName = "asteroid"
@@ -289,68 +300,33 @@ function createAsteroid()
 
 					transition.to ( asteroidTable[asteroidNum] , {time = math.random (12000, 20000), x = ship.x +500, y= math.random (0, display.contentHeight)})
 					asteroids:insert(asteroidTable[asteroidNum])
-			
-				--collider function hopefully?
-				function asteroidTable:collison(event)
-				if (e.other.class == "bullet") then
-					timer.performWithDealy(1, function()
-					removeAsteroid()
-					end, 1)
-				end
-				return true
-				end
-				
-				return asteroidTable
+					
+					asteroidTable[asteroidNum].collision = function(self, event)
+						if(event.phase == "began" and event.other.name == "bullet") then
+							asteroidTable[asteroidNum] = nil
+							display.remove(self)
+							display.remove(other)
+						
+							-- score update
+							
+							alloy = alloy + math.random(5)
+							alloyNum = display.newText ("Alloy: ".. alloy, 15, 5, nil, 8 )
+							print(alloy)
+						
+						
+						end
+						return true
+						end
+						
+					asteroidTable[asteroidNum]:addEventListener("collision", asteroid)
 					
 					
 
 end
 
 
---collisions
-function onCollision(event)
-	if(event.object1.myName =="ship" and event.object2.myName =="enemy") then	
-			
-			
-			local function setgameOver()
-			composer.removeScene( "gameover", false )
-			composer.gotoScene( "gameover", { effect = "crossFade", time = 333 } )
-			
-			end
-			-- use setgameover after transition complete to avoid that user clicks gameover before the transition is completed
-			transition.to( ship, { time=1500, xScale = 0.4, yScale = 0.4, alpha=0, onComplete=setgameOver  } )
-			gameActive = false
-			removeEnemies()
-			audio.fadeOut(backgroundsnd)
-			display.remove()
-	end
-	
-	if(event.object1.name == "bullet" and event.object2.name == "asteroid") then
-		display.remove(event.object2)
-		alloy = alloy + math.random(5)
-			
-	end	
-	
-	if(event.object1.myName =="ship" and event.object2.myName =="asteroid") then	
-			
-			
-			local function setgameOver()
-			composer.removeScene( "gameover", false )
-			composer.gotoScene( "gameover", { effect = "crossFade", time = 333 } )
-			
-			end
-			-- use setgameover after transition complete to avoid that user clicks gameover before the transition is completed
-			transition.to( ship, { time=1500, xScale = 0.4, yScale = 0.4, alpha=0, onComplete=setgameOver  } )
-			gameActive = false
-			removeAsteroid()
-			audio.fadeOut(backgroundsnd)
-			display.remove()
-	end	
-			
-			
-			
-	end	
-	
+
+
 
  
 
@@ -430,7 +406,7 @@ downArrow:addEventListener("touch", downArrowtouch)
 Runtime:addEventListener("enterFrame", createWalls)
 Runtime:addEventListener("enterFrame", moveShip)
 Runtime:addEventListener("touch", stopShip)
-Runtime:addEventListener("collision" , onCollision)
+
 
 
  
