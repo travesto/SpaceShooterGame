@@ -1,8 +1,8 @@
 M = {}
-M.maxLevels = 50
+M.maxLevels = 10
 M.maxShips = 4
 M.maxAsteroidSpawn = 8
-M.levelScore = 0
+M.alloy = 75
 M.asteroid = 8
 M.products = {}
 M.settings = {}
@@ -17,3 +17,13 @@ M.settings.levels = {}
 --      .score -- Score for the level
 -- 		.energyBonus -- Bonus for unused energy
 return M
+
+
+
+
+
+
+
+
+
+

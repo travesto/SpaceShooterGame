@@ -4,6 +4,7 @@ composer.isDebug = true --for debuging only set to false before release builds
 local cWidth = display.contentCenterX
 local cHeight = display.contentCenterY
 local dusk = require("Dusk.dusk")
+local playerData = require ("playership1")
 --scene starter
 local scene = composer.newScene()
 
@@ -14,8 +15,8 @@ local enemySheetInfo = require("assets.images.enemy")
 local enemySheet = graphics.newImageSheet( "assets/images/enemy.png", enemySheetInfo:getSheet() )
 local laserSheetInfo = require("assets.images.laser")
 local laserSheet = graphics.newImageSheet( "assets/images/laser.png", laserSheetInfo:getSheet() )
-local playerSheetInfo = require("assets.images.player")
-local playerSheet = graphics.newImageSheet( "assets/images/player.png", playerSheetInfo:getSheet() )
+local playerSheetInfo = require("assets.images.player")   --<PH>
+local playerSheet = graphics.newImageSheet( "assets/images/player.png", playerSheetInfo:getSheet() ) -- <PH>
 local guiSheetInfo = require("assets.images.ingameguii")
 local guiSheet = graphics.newImageSheet("assets/images/ingameguii.png", guiSheetInfo:getSheet())
 
@@ -37,7 +38,7 @@ local numHit = 0
 local shipMoveX = 0
 local shipMoveY = 0
 local ship
-local speed = 2
+local speed = 3
 local shootbtn
 local numEnemy = 0 
 local enemyArray = {}
@@ -71,7 +72,7 @@ local shot = audio.loadSound("assets/sounds/laser.mp3")
 --local backgroundsnd = audio.loadStream ("")
 
 --background
-local background = display.newImageRect("assets/images/level001wip.png", display.contentWidth, display.contentHeight) -- <PH> will be replaced by Sunday the 11th
+local background = display.newImageRect("assets/images/level001wip.png", display.contentWidth, display.contentHeight) -- <PH> will be replaced by Sunday the 18th
     background.x = display.contentCenterX
     background.y = display.contentCenterY
     
@@ -188,6 +189,7 @@ function createShip()
 	ship.rotation = 90
 	ship.myName = "ship"
 	ship:scale(0.5, 0.5)
+	
 
 	--destroyed
 	ship.collision = function(self, event)
@@ -250,8 +252,8 @@ function createEnemy()
 						
 							-- score update
 							
-							alloy = alloy + math.random(20)
-							alloyNum = display.newText ("Alloy: ".. alloy, 15, 5, nil, 8 )
+							alloy = alloy + math.random(10, 20)
+							
 							print("Alloy number ", alloy)
 						
 						
@@ -275,7 +277,7 @@ end
 			--bullet colliders
 			local bulletCollisionFilter = { categoryBits=8, maskBits = 6}
 			local bullet = display.newSprite( laserSheet , {frames={laserSheetInfo:getFrameIndex("laserBlue04")}})
-			physics.addBody(bullet, {filter = bulletCollisionFilter});
+			physics.addBody(bullet, {"static", filter = bulletCollisionFilter});
 			bullet.x = ship.x + 40
     		bullet.y = ship.y
     		bullet.rotation = ship.rotation
@@ -349,8 +351,8 @@ function createAsteroid()
 							-- score update
 							
 							alloy = alloy + math.random(5)
-							alloyNum = display.newText ("Alloy: ".. alloy, 15, 5, nil, 8 )
-							print("Alloy number ", alloy)
+							
+							print("Alloy amount ", alloy)
 						
 						
 						end
@@ -373,14 +375,14 @@ end
 
 
 --remove the dead ones
--- function removeEnemies()
-	-- for i =1, #enemyArray do
-		-- if (enemyArray[i].myName ~= nil) then
-		-- enemyArray[i]:removeSelf()
-		-- enemyArray[i].myName = nil
-		-- end
-	-- end
--- end
+function removeEnemies()
+	for i =1, #enemyArray do
+		if (enemyArray[i].myName ~= nil) then
+		enemyArray[i]:removeSelf()
+		enemyArray[i].myName = nil
+		end
+	end
+end
 
 --remove destroyed asteroid
 function removeAsteroid()

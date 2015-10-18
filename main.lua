@@ -37,16 +37,12 @@ local function endSplash ()
     splash:removeSelf()
     splash = nil
  
-    -- set default background color for the game
-    gradient = graphics.newGradient(
-    { 80, 211, 255 },
-    {80, 100, 180 },
-    "up" )
+   
  
     composer.gotoScene ( "menu", { effect = "zoomOutIn"} )
 end 
  
-timer.performWithDelay(5000, endSplash)
+timer.performWithDelay(3000, endSplash)
 
 
 
