@@ -42,8 +42,8 @@ function scene:create( event )
     background.x = display.contentCenterX
     background.y = display.contentCenterY
     sceneGroup:insert(background)
-
-    local wooHooOptions = { text = "Woo hoo!", fontSize = 42, font = native.systemFontBold, align = "center"}
+    --I assume this is the text for the level completion.  The group decided we liked this text better than 'woohoo'.
+    local wooHooOptions = { text = "Good job, Cadet!", fontSize = 42, font = native.systemFontBold, align = "center"}
 
     local wooHooText = display.newText( wooHooOptions )
     wooHooText.x = display.contentCenterX 
@@ -59,12 +59,29 @@ function scene:create( event )
     -- Create the widget
     local doneButton = widget.newButton({
         id = "button1",
-        label = "Next level",
+        label = "Next Level",
         width = 100,
         height = 32,
         onEvent = handleButtonEvent
     })
     doneButton.x = display.contentCenterX 
+    doneButton.y = display.contentHeight - 40
+    sceneGroup:insert( doneButton )
+    
+    --Store button
+    upgradeoptionstext = display.newText("Upgrades" .. myData.settings.currentLevel, display.contentCenterX, display.contentCenterX, display.contentCenterY, native.systemFontBold, 48)
+    upgradeoptionstext:setFillColor( 0 )
+    sceneGroup:insert(upgradeoptionstext)
+    
+    -- Create widget
+    local doneButton = widget.newButton({
+        id = "upgradebutton",
+        label = "Upgrades",
+        width = 100,
+        height = 32,
+        onEvent = handleButtonEvent
+    })
+    doneButton.x = display.contentCenterX
     doneButton.y = display.contentHeight - 40
     sceneGroup:insert( doneButton )
 
