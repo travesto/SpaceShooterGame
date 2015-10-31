@@ -25,8 +25,8 @@ local function handleLevelSelect( event )
     if ( "ended" == event.phase ) then
         -- set the current level to the ID of the selected level
         myData.settings.currentLevel = event.target.id
-        composer.removeScene( "level001", false ) --demo will be used to test certain settings and features with out damaging actual level functionality
-        composer.gotoScene( "level001", { effect = "crossFade", time = 333 } ) --demo will be used to test certain settings and features with out damaging actual level functionality
+        composer.removeScene( "game", false ) --demo will be used to test certain settings and features with out damaging actual level functionality
+        composer.gotoScene( "game", { effect = "crossFade", time = 333 } ) --demo will be used to test certain settings and features with out damaging actual level functionality
     end
 end
 
@@ -35,8 +35,8 @@ local function handleLevelSelect2( event )
     if ( "ended" == event.phase ) then
         -- set the current level to the ID of the selected level
         myData.settings.currentLevel = event.target.id
-        composer.removeScene( "level002", false ) --demo will be used to test certain settings and features with out damaging actual level functionality
-        composer.gotoScene( "level002", { effect = "crossFade", time = 333 } ) --demo will be used to test certain settings and features with out damaging actual level functionality
+        composer.removeScene( "game", false ) --demo will be used to test certain settings and features with out damaging actual level functionality
+        composer.gotoScene( "game", { effect = "crossFade", time = 333 } ) --demo will be used to test certain settings and features with out damaging actual level functionality
     end
 end
 
@@ -45,8 +45,8 @@ local function handleLevelSelect3( event )
     if ( "ended" == event.phase ) then
         -- set the current level to the ID of the selected level
         myData.settings.currentLevel = event.target.id
-        composer.removeScene( "level003", false ) --demo will be used to test certain settings and features with out damaging actual level functionality
-        composer.gotoScene( "level003", { effect = "crossFade", time = 333 } ) --demo will be used to test certain settings and features with out damaging actual level functionality
+        composer.removeScene( "game", false ) --demo will be used to test certain settings and features with out damaging actual level functionality
+        composer.gotoScene( "game", { effect = "crossFade", time = 333 } ) --demo will be used to test certain settings and features with out damaging actual level functionality
     end
 end
 
@@ -55,8 +55,8 @@ local function handleLevelSelect4( event )
     if ( "ended" == event.phase ) then
         -- set the current level to the ID of the selected level
         myData.settings.currentLevel = event.target.id
-        composer.removeScene( "level004", false ) --demo will be used to test certain settings and features with out damaging actual level functionality
-        composer.gotoScene( "level004", { effect = "crossFade", time = 333 } ) --demo will be used to test certain settings and features with out damaging actual level functionality
+        composer.removeScene( "game", false ) --demo will be used to test certain settings and features with out damaging actual level functionality
+        composer.gotoScene( "game", { effect = "crossFade", time = 333 } ) --demo will be used to test certain settings and features with out damaging actual level functionality
     end
 end
 --

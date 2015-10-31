@@ -13,8 +13,8 @@ local myData = require( "mydata" )
 
 local function handlePlayButtonEvent( event )
     if ( "ended" == event.phase ) then
-        composer.removeScene( "playerselect", false )
-        composer.gotoScene("playerselect", { effect = "crossFade", time = 333 })
+        composer.removeScene( "game", false )
+        composer.gotoScene("game", { effect = "crossFade", time = 333 })
     end
 end
 
@@ -51,18 +51,18 @@ function scene:create( event )
     -- setup a page background, really not that important though composer
     -- crashes out if there isn't a display object in the view.
     --
-    local background = display.newImageRect("assets/images/blue.png", display.contentWidth, display.contentHeight)
+    local background = display.newImageRect("assets/images/Main_Menu_Background.png", display.contentWidth, display.contentHeight)
     background.x = display.contentCenterX
     background.y = display.contentCenterY
     sceneGroup:insert( background )
 
-    local title = display.newText("Galaxy", 100, 32, native.systemFontBold, 32 )
-    title.x = display.contentCenterX
-    title.y = 40
-    title:setFillColor( 0,1,0 )
-    sceneGroup:insert( title )
+    -- local title = display.newText("Galaxy", 100, 32, native.systemFontBold, 32 )
+    -- title.x = display.contentCenterX
+    -- title.y = 40
+    -- title:setFillColor( 0,1,0 )
+    -- sceneGroup:insert( title )
 	---------------------------------------------------------------------------------------------------------------------------------------------------------------
-	local versionText = display.newText("Version 0.4 Build (131015)Development", 12, 12, native.systemFont, 8)
+	local versionText = display.newText("Version 0.6.1 Build (311015)Development", 12, 12, native.systemFont, 8)
 	versionText.x = 75
 	versionText.y = 350
 	versionText:setFillColor(0,1,0)
@@ -72,9 +72,10 @@ function scene:create( event )
     local playButton = widget.newButton({
         id = "button1",
         label = "Play",
-        width = 100,
+       	width = 100,
         height = 32,
-        onEvent = handlePlayButtonEvent
+		onEvent = handlePlayButtonEvent,
+		labelColor = {default = { 1,1,1}, over = {1,1,1}}
     })
     playButton.x = display.contentCenterX
     playButton.y = display.contentCenterY - 10
@@ -83,10 +84,11 @@ function scene:create( event )
     -- Create the widget
     local settingsButton = widget.newButton({
         id = "button2",
-        label = "Settings",
+        label = "Leaderboards",
         width = 100,
         height = 32,
-        onEvent = handleSettingsButtonEvent
+        onEvent = handleSettingsButtonEvent,
+		labelColor = {default = { 1,1,1}, over = {1,1,1}}
     })
     settingsButton.x = display.contentCenterX
     settingsButton.y = display.contentCenterY + 50

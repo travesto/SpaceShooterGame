@@ -1,119 +1,211 @@
---requireds
+--This is the true level 1 of this game 
+
+
+--composer stuff
 local composer = require("composer")
- local sheetInfo = require("gui")
- local myImageSheet = graphics.newImageSheet( "gui.png", sheetInfo:getSheet() )
+local cWidth = display.contentCenterX
+local cHeight = display.contentCenterY
+local dusk = require("Dusk.dusk")
 
-
---for development builds use "DEMO.lua" for testing
-
-
-
---scenes
+--scene starter
 local scene = composer.newScene()
 
---create a scene
-function scene:create( event )
-    local group = self.view
-    
-    local blueSprite = display.newSprite( myImageSheet , {frames={sheetInfo:getFrameIndex("buttonBlue")}})
-    blueSprite.x = 510
-    blueSprite.y = 550
-    blueSprite.name = "start button"
-    local StartText = display.newText("Start Demo", 510, 550, "Conquest", 30)
-    StartText:setFillColor(0)
 
-    blueSprite:addEventListener("tap", startGame)
-    blueSprite.text = "tap"
+--game globals
+local level = 1
+local resource = 75
+local energy = 100
+local shipMoveX = 0
+local shipMoveY = 0
+local ship
+local speed = 2.5
+local shootbtn
+local ultbtn
+local enemyArray = {}
+local astArray = {}
+local enemyNum = 0
+local astNum = 0
+local gameActive = true
+local canFireBullet = true
 
-    -- local grnSprite = display.newSprite( myImageSheet , {frames={sheetInfo:getFrameIndex("buttonGreen")}})
-    -- grnSprite.x = 510
-    -- grnSprite.y = 600
-    -- grnSprite.name = "options"
+--global function
+local createGame
+local createEnemy
+local createAsteroid
+local shoot = {}
+local newGame
+local nextLevel
+local backgroundMusic
+local setGameOver = false 
+local removeEnemy
+local removeAsteroid
 
-    -- grnSprite:addEventListener("tap", options)
-    -- grnSprite.text = "tap options"
-    -- local OptionText = display.newText("Options", 510, 600, "Conquest", 30)
-    -- OptionText:setFillColor(0)
+--physics engine init
+local physics = require ("physics")
+physics.start()
+physics.setGravity (0,0)
+physics.setDebugErrorsEnabled (enabled) -- physics and collider debugger
 
-    local function tapListener(event)
-        local object = event.target
-        print(object.name.. "Tap!")
-    end
+--groupings
+local enemies = display.newGroup()
+local asteroids = display.newGroup()
 
-    local function touchListener(event)
-        local object = event.target
-        print(event.target.name "Touched"..event.phase)
-    end
+--sprite sheet
+local gameSheetInfo = require("propAssets")
+local gameSheet = graphics.newImageSheet("assets/images/propAssets.png", gameSheetInfo:getSheet())
+local guiSheetInfo = require("assets.images.ingameguii")
+local guiSheet = graphics.newImageSheet("assets/images/ingameguii.png", guiSheetInfo:getSheet())
 
+--audio
+local shot = audio.loadSound("assets/sounds/laser.mp3")
+--local backgroundsnd = audio.loadStream ("")
 
-    composer.isDebug = true
-    
-    local background = display.newImageRect("blue.png", display.contentWidth, display.contentHeight)--<PH>
-    background.x = display.contentCenterX
-    background.y = display.contentCenterY
-    local initText = display.newText("Galaxy", display.contentCenterX,display.contentCenterY - 200, "Conquest", 70,group) --<PH>
-    local versionText = display.newText("Version 0.2 Build(041015)Development", 225, 750, "conquest",25, group)
-
-    initText:setFillColor(0,1,0)
-    versionText:setFillColor(0,1,0)
+--<PH> background </PH>
+dusk.loadMap("level001wip.json")
+dusk.buildMap("level001wip.json")
 
 
-  
-   group:insert(background)
-   group:insert(initText)
-   group:insert(versionText)   
-   group:insert(blueSprite)
-   group:insert(StartText)
-    
+--<PH> Text Scoring </PH>
+alloyNum = display.newText("Alloy: " .. resource, 15, 5, nil, 8)
+energyNum = display.newText("Energy: ".. energy, 22, 15, nil, 8)
+levelNum = display.newText ("Level: ".. level, 15, 25, nil, 8)
+
+--<PH> GamePad </PH>
+local leftArrow = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark04")}})
+leftArrow.x = 48
+leftArrow.y = 300
+leftArrow:scale(0.5, 0.5)
+local rightArrow = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark05")}})
+rightArrow.x = 86
+rightArrow.y = 300
+rightArrow:scale(0.5, 0.5)
+local upArrow = display.newSprite(guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark02")}})
+upArrow.x = 67
+upArrow.y = 280
+upArrow:scale(0.5, 0.5)
+local downArrow = display.newSprite(guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark09")}})
+downArrow.x = 67
+downArrow.y = 320
+downArrow:scale(0.5, 0.5)
+
+
+-- --fire button
+shootbtn = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark35")}})
+shootbtn.x = display.contentWidth - 45
+shootbtn.y = display.contentHeight - 55
+shootbtn:scale(0.5, 0.5)
+
+ultbtn = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark36")}})
+ultbtn.x = display.contentWidth - 70
+ultbtn.y = display.contentHeight - 25
+ultbtn:scale(0.5, 0.5)
+
+
+local function stopShip(event)
+	if event.phase == "ended" then
+			shipMoveX = 0 
+	end
+	if event.phase == "ended" then
+			shipMoveY = 0
+	end
 end
 
---show scene
-function scene:show( event )
-    local phase = event.phase
-    local previousScene = composer.getSceneName("previous")
-    if(previousScene~=nil) then
-        composer.removeScene(previousScene)
-    end
-    if (phase == "did") then
-    
-        
-    end
-end
-
---hide scene
-function scene:hide( event )
-    local phase = event.phase
-    if ( phase == "will" ) then
-
-        
-    end
-    
-
-end
-
-function scene:destroy(event)
-    local group = self.view
-    
-
+local function moveShip(event)
+	ship.x = ship.x + shipMoveX
+	ship.y = ship.y + shipMoveY
 end
 
 
---go to gameActual
+
+function leftArrowtouch()
+	shipMoveX = -speed
+end
+
+function rightArrowtouch()
+	shipMoveX = speed
+end
+
+function upArrowtouch()
+	shipMoveY = -speed
+end
+
+function downArrowtouch()
+	shipMoveY = speed
+end
+
+function shootBtntouch()
+	shoot()
+end
+
+function ultBtntouch()
+
+end
+
+--player ship generated
+function createShip()
+	--collisions inside function for player
+	local playerCollisionFilter = { categoryBits=1, maskBits = 6}
+	ship = display.newSprite (gameSheet, {frames={gameSheetInfo:getFrameIndex("RedRacer_skin125")}})
+	physics.addBody( ship, {filter = playerCollisionFilter } )
+	physics.setScale(15)
+	ship.x = 70
+	ship.y = display.contentCenterY
+	ship.myName = "ship"
+	ship:scale(0.5,0.5)
+	
+end
+
+--player fire mechanism
+function shoot(tap, event)
+	if(canFireBullet == true) then
+	--bullet collider
+		local bulletCollisionFilter = {categoryBits = 8, maskBits = 6}
+		local bullet = display.newSprite( gameSheet , {frames={gameSheetInfo:getFrameIndex("RedRacer_genericbullet25")}})
+		physics.addBody(bullet, {"static", filter = bulletCollisionFilter})
+		bullet.x = ship.x + 40
+		bullet.y = ship.y 
+		bullet.gravityScale = 0
+		bullet.name = "bullet"
+		bullet.isBullet = true
+		
+		canFireBullet = false
+		audio.play(shot)
+		
+		bullet:scale(0.5,0.5)
+		
+		transition.to (bullet, {time = 1000, x  =1000, y = ship.y, 
+			onComplete = function(self) self.parent:remove(self); self = nil;
+			end
+			})
+	else
+		return
+	end
+		local function enableBulletFire()
+			canFireBullet = true
+		end
+		timer.performWithDelay(300, enableBulletFire, 1)
+end
+
+
+--things to still code into here
+--enemy, asteroid, level progression
+--on level progression the game will reset the scene to 0 increase the level text by 1 and change the spawns based on code
+
+
+
 function startGame()
-    composer.gotoScene("demo", "fade", 500)--use demo instead of level for testing game systems
-    return true
+createShip()
+
+
+shootbtn:addEventListener("tap", shootBtntouch)
+rightArrow:addEventListener ("touch", rightArrowtouch)
+leftArrow:addEventListener("touch", leftArrowtouch)
+upArrow:addEventListener("touch", upArrowtouch)
+downArrow:addEventListener("touch", downArrowtouch)
+Runtime:addEventListener("enterFrame", moveShip)
+Runtime:addEventListener("touch", stopShip)
+
 end
 
--- function options()
---     composer.showOverlay ("options" , {effect = "fade" , params = {levelNum = "game" }})
---     return true
--- end
-
-
-
---listeners
-scene:addEventListener("create", scene)
-scene:addEventListener("show", scene)
-scene:addEventListener("hide", scene)
-
+startGame()
 return scene
