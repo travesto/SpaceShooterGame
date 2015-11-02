@@ -62,7 +62,7 @@ local shot = audio.loadSound("assets/sounds/laser.mp3")
 
 --<PH> background </PH>
 dusk.loadMap("level001wip.json")
-dusk.buildMap("level001wip.json")
+--dusk.buildMap("level001wip.json")
 
 
 --<PH> Text Scoring </PH>
@@ -138,7 +138,7 @@ function shootBtntouch()
 end
 
 function ultBtntouch()
-
+	ult()
 end
 
 --player ship generated
@@ -186,7 +186,30 @@ function shoot(tap, event)
 		timer.performWithDelay(300, enableBulletFire, 1)
 end
 
+function ult(tap, event)
 
+	local ultCollisionFilter = {categoryBits = 16, maskBits = 6}
+	local ult = display.newSprite( gameSheet , {frames={gameSheetInfo:getFrameIndex("RedRacer_genericbullet25")}})
+	physics.addBody(ult, {"static", filter = ultCollisionFilter})
+	ult.x = ship.x + 40
+	ult.y = ship.y
+	ult.gravityScale = 0
+	ult.name = "ultimate"
+	ult.isBullet = true
+	
+	audio.play(shot)  --<PH>
+	
+	ult:scale(0.5, 0.5)
+	
+	transition.to (ult, {time = 1000, x = 1000, y = ship.y,
+		onComplete = function(self) self.parent:remove(self); self = nil;
+		end
+		})
+	print(energy -75)
+	return
+	
+	timer.performWithDelay(300, 1)
+end
 --things to still code into here
 --enemy, asteroid, level progression
 --on level progression the game will reset the scene to 0 increase the level text by 1 and change the spawns based on code
@@ -198,6 +221,7 @@ createShip()
 
 
 shootbtn:addEventListener("tap", shootBtntouch)
+ultbtn:addEventListener("tap", ultBtntouch)
 rightArrow:addEventListener ("touch", rightArrowtouch)
 leftArrow:addEventListener("touch", leftArrowtouch)
 upArrow:addEventListener("touch", upArrowtouch)
