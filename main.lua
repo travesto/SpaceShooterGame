@@ -100,6 +100,12 @@ end
 if device.isAndroid then
     Runtime:addEventListener( "key", onKeyEvent )
 end
+--Game Music Goes here
+-- Define music variables
+local gameMusic = audio.loadStream( "assets/sounds/gamemusic.mp3" )
+ 
+-- Play the music
+local gameMusicChannel = audio.play( gameMusic, { loops = -1 } )
 
 --
 -- handle system events

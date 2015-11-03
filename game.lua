@@ -69,7 +69,11 @@ dusk.loadMap("level001wip.json")
 alloyNum = display.newText("Alloy: " .. resource, 15, 5, nil, 8)
 energyNum = display.newText("Energy: ".. energy, 22, 15, nil, 8)
 levelNum = display.newText ("Level: ".. level, 15, 25, nil, 8)
-
+--[[
+	the buttons are not scaling b/c the dimensions are static, according to Burton.
+	He recommended using this code piece instead.
+	-->	display.contentHeight x .75
+]]
 --<PH> GamePad </PH>
 local leftArrow = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark04")}})
 leftArrow.x = 48
