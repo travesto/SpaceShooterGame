@@ -150,13 +150,13 @@ function scene:create( event )
 
     local doneButton = widget.newButton({
         id = "button1",
-        label = "Done",
+        label = "Get the hell out of here!",
         width = 100,
         height = 32,
         onEvent = handleButtonEvent
     })
     doneButton.x = display.contentCenterX
-    doneButton.y = display.contentHeight - 40
+    doneButton.y = display.contentHeight - 80
     sceneGroup:insert( doneButton )
 end
 
