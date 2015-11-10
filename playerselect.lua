@@ -96,7 +96,7 @@ function scene:create( event )
 	{
 		width = 99,
 		height = 75,
-		defaultFile = "assets/images/playerShip1_red.png",
+		defaultFile = "assets/images/RedRacer_skin125.png",
 		
 		onEvent = handleLevelSelect
 	}
@@ -105,7 +105,7 @@ function scene:create( event )
 	{
 		width = 112,
 		height = 75,
-		defaultFile = "assets/images/playerShip2_green.png" ,
+		defaultFile = "assets/images/SpaceInvader.png" ,
 		
 		onEvent = handleLevelSelect2
 	}
