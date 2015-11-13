@@ -10,14 +10,15 @@ local dusk = require("Dusk.dusk")
 --scene starter
 local scene = composer.newScene()
 
+
 --wrap texture for background setup
 display.setDefault("textureWrapX", "repeat")
 
-local background = display.newRect(display.contentCenterX, display.contentCenterY, 320, 480)
+local background = display.newRect(display.contentCenterX, display.contentCenterY, 6288, 1000)
 background.fill = {type = "image", filename = "assets/images/background_1.png" }
 
 local function animateBackground()
-    transition.to( background.fill, { time=5000, x=1, delta=true, onComplete=animateBackground } )
+    transition.to( background.fill, { time=20000, x=1, delta=true, onComplete=animateBackground } )
 end
 
 animateBackground()
