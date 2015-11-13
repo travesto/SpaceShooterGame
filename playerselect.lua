@@ -114,7 +114,7 @@ function scene:create( event )
 	{
 		width = 98,
 		height = 75,
-		defaultFile = "assets/images/playerShip3_orange.png",
+		defaultFile = "assets/images/BlueLightning_skin1.png",
 		
 		onEvent = handleLevelSelect3
 	}
