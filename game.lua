@@ -18,10 +18,11 @@ local background = display.newRect(display.contentCenterX, display.contentCenter
 background.fill = {type = "image", filename = "assets/images/background_1.png" }
 
 local function animateBackground()
-    transition.to( background.fill, { time=20000, x=1, delta=true, onComplete=animateBackground } )
+    transition.to( background.fill, { time=50000, x=1, delta=true, onComplete=animateBackground } )
 end
 
 animateBackground()
+--
 
 
 --game globals
