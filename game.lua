@@ -264,58 +264,6 @@ end
 
 
 
----------------------------  Trey's Attempts to spawn an enemy
---[[function createEnemy()
-	--collisions inside function for player
-	local playerCollisionFilter = { categoryBits=1, maskBits = 6}
-	enemy_ = display.newImage (gameSheet, {frames={gameSheetInfo:getFrameIndex("enemyBlack1")}})
-	physics.addBody( ship, {filter = playerCollisionFilter } )
-	physics.setScale(10)
-	enemy_.x = 450
-	enemy_.y = display.contentCenterY
-	enemy_.myName = "enemy"
-	enemy_:scale(0.5,0.5)
-	
-end
-
-
-
-
---enemy fire mechanism?
-function enemyshoot(event)
-	if(canFireBullet == true) then
-	--bullet collider
-		local bulletCollisionFilter = {categoryBits = 8, maskBits = 6}
-		local bullet = display.newSprite( gameSheet , {frames={gameSheetInfo:getFrameIndex("RedRacer_genericbullet25")}})
-		physics.addBody(bullet, {"static", filter = bulletCollisionFilter})
-		bullet.x = ship.x - 40
-		bullet.y = ship.y 
-		bullet.gravityScale = 0
-		bullet.name = "bullet"
-		bullet.isBullet = true
-		
-		canFireBullet = false
-		audio.play(shot)
-		
-		bullet:scale(0.5,0.5)
-		
-		transition.to (bullet, {time = 1000, x  =1000, y = ship.y, 
-			onComplete = function(self) self.parent:remove(self); self = nil;
-			end
-			})
-	else
-		return
-	end
-		local function enableBulletFire()
-			canFireBullet = true
-		end
-		timer.performWithDelay(300, enableBulletFire, 1)
-end
--------------------------------
-
---]]
-
-
 
 function startGame()
 createShip()
@@ -330,8 +278,7 @@ downArrow:addEventListener("touch", downArrowtouch)
 Runtime:addEventListener("enterFrame", moveShip)
 Runtime:addEventListener("touch", stopShip)
 
---createEnemy() -----------------------
---enemyshoot()
+
 
 
 
