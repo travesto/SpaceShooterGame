@@ -105,7 +105,7 @@ function scene:create( event )
     -- Create the widget
     local settingsButton = widget.newButton({
         id = "button2",
-        label = "Leaderboards",
+        label = "Settings",
         width = 100,
         height = 32,
         onEvent = handleSettingsButtonEvent,
