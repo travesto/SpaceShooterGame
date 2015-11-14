@@ -55,6 +55,7 @@ local astNum = 0
 local gameActive = true
 local canFireBullet = true
 
+
 --global function
 local createGame
 local createEnemy
@@ -142,8 +143,24 @@ local function stopShip(event)
 end
 
 local function moveShip(event)
-	ship.x = ship.x + shipMoveX
-	ship.y = ship.y + shipMoveY
+	if ship.x >= 50 and ship.x <= display.contentWidth - 50 	then 
+		ship.x = ship.x + shipMoveX
+	else
+		if ship.x < display.contentCenterX then
+			ship.x = 50
+		else
+			ship.x = display.contentWidth - 50
+		end
+	end
+	if ship.y >= 50 and ship.y <= display.contentHeight - 50 then
+		ship.y = ship.y + shipMoveY
+	else
+		if ship.y < display.contentCenterY then
+			ship.y = 50
+		else
+			ship.y = display.contentHeight - 50
+		end
+	end
 end
 
 
