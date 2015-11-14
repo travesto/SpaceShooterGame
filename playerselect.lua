@@ -25,6 +25,7 @@ local function handleLevelSelect( event )
     if ( "ended" == event.phase ) then
         -- set the current level to the ID of the selected level
         myData.settings.currentLevel = event.target.id
+        _G.playerShip="assets/images/RedRacer_skin125.png"
         composer.removeScene( "game", false ) --demo will be used to test certain settings and features with out damaging actual level functionality
         composer.gotoScene( "game", { effect = "crossFade", time = 333 } ) --demo will be used to test certain settings and features with out damaging actual level functionality
     end
@@ -35,6 +36,7 @@ local function handleLevelSelect2( event )
     if ( "ended" == event.phase ) then
         -- set the current level to the ID of the selected level
         myData.settings.currentLevel = event.target.id
+        _G.playerShip="assets/images/SpaceInvader.png"
         composer.removeScene( "game", false ) --demo will be used to test certain settings and features with out damaging actual level functionality
         composer.gotoScene( "game", { effect = "crossFade", time = 333 } ) --demo will be used to test certain settings and features with out damaging actual level functionality
     end
@@ -45,6 +47,7 @@ local function handleLevelSelect3( event )
     if ( "ended" == event.phase ) then
         -- set the current level to the ID of the selected level
         myData.settings.currentLevel = event.target.id
+        _G.playerShip="assets/images/BlueLightning_skin1.png"
         composer.removeScene( "game", false ) --demo will be used to test certain settings and features with out damaging actual level functionality
         composer.gotoScene( "game", { effect = "crossFade", time = 333 } ) --demo will be used to test certain settings and features with out damaging actual level functionality
     end

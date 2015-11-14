@@ -18,17 +18,17 @@ local background = display.newRect(display.contentCenterX, display.contentCenter
 background.fill = {type = "image", filename = "assets/images/background_1.png" }
 
 local function animateBackground()
-    transition.to( background.fill, { time=100000, x=1, delta=true, onComplete=animateBackground } )
+    transition.to( background.fill, { time=150000, x=1, delta=true, onComplete=animateBackground } )
 end
 
 animateBackground()
 
 
 --Top Layer of Background
-display.setDefault("textureWrapX", "repeat")
-
-local background = display.newRect(display.contentCenterX, display.contentCenterY, 692, 730)
-background.fill = {type = "image", filename = "assets/images/planet_cut.png" }
+display.setDefault("textureWrapX","repeat")
+timer.performWithDelay(100000,1)
+local background = display.newRect(100, 100, 1477, 316)
+background.fill = {type = "image", filename = "assets/images/planet_extra.png" }
 
 local function animateBackground()
     transition.to( background.fill, { time=60000, x=1, delta=true, onComplete=animateBackground } )
@@ -85,7 +85,7 @@ local guiSheet = graphics.newImageSheet("assets/images/ingameguii.png", guiSheet
 
 --audio
 local shot = audio.loadSound("assets/sounds/laser.mp3")
---local backgroundsnd = audio.loadStream ("")
+--local backgroundsnd = audio.loadStream ("") 
 
 --<PH> background </PH>
 dusk.loadMap("level001wip.json")
@@ -176,9 +176,9 @@ end
 function createShip()
 	--collisions inside function for player
 	local playerCollisionFilter = { categoryBits=1, maskBits = 6}
-	ship = display.newSprite (gameSheet, {frames={gameSheetInfo:getFrameIndex("RedRacer_skin125")}})
+	ship = display.newImage(_G.playerShip)--display.newSprite (gameSheet, {frames={gameSheetInfo:getFrameIndex(_G.playerShip)}})--"RedRacer_skin125")}})
 	physics.addBody( ship, {filter = playerCollisionFilter } )
-	physics.setScale(15)
+	physics.setScale(10)
 	ship.x = 70
 	ship.y = display.contentCenterY
 	ship.myName = "ship"

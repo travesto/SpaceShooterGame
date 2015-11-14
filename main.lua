@@ -13,6 +13,8 @@ local utility = require( "utility" )
 local myData = require( "mydata" )
 local device = require( "device" )
 
+_G.playerShip=""
+
 display.setStatusBar( display.HiddenStatusBar )
 
 
