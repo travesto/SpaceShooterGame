@@ -58,6 +58,7 @@ local function handleLevelSelect4( event )
     if ( "ended" == event.phase ) then
         -- set the current level to the ID of the selected level
         myData.settings.currentLevel = event.target.id
+        _G.playerShip="assets/images/ufoYellow.png"
         composer.removeScene( "game", false ) --demo will be used to test certain settings and features with out damaging actual level functionality
         composer.gotoScene( "game", { effect = "crossFade", time = 333 } ) --demo will be used to test certain settings and features with out damaging actual level functionality
     end
