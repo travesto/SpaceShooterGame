@@ -58,7 +58,7 @@ local function handleLevelSelect4( event )
     if ( "ended" == event.phase ) then
         -- set the current level to the ID of the selected level
         myData.settings.currentLevel = event.target.id
-        _G.playerShip="assets/images/jetsons_image.png"
+        _G.playerShip="assets/images/PlasmaBlaster_skin1.png"
         composer.removeScene( "game", false ) --demo will be used to test certain settings and features with out damaging actual level functionality
         composer.gotoScene( "game", { effect = "crossFade", time = 333 } ) --demo will be used to test certain settings and features with out damaging actual level functionality
     end
@@ -100,7 +100,7 @@ function scene:create( event )
 	{
 		width = 99,
 		height = 75,
-		defaultFile = "assets/images/RedRacer_skin125.png",
+		defaultFile = "assets/images/RedRacer_skin125_squared.png",
 		
 		onEvent = handleLevelSelect
 	}
@@ -109,7 +109,7 @@ function scene:create( event )
 	{
 		width = 112,
 		height = 75,
-		defaultFile = "assets/images/SpaceInvader.png" ,
+		defaultFile = "assets/images/SpaceInvader_squared.png" ,
 		
 		onEvent = handleLevelSelect2
 	}
@@ -118,7 +118,7 @@ function scene:create( event )
 	{
 		width = 98,
 		height = 75,
-		defaultFile = "assets/images/BlueLightning_skin1.png",
+		defaultFile = "assets/images/BlueLightning_skin1_squared.png",
 		
 		onEvent = handleLevelSelect3
 	}
@@ -127,7 +127,7 @@ function scene:create( event )
 	{
 		width = 91,
 		height = 91,
-		defaultFile = "assets/images/jetsons_image.png",
+		defaultFile = "assets/images/PlasmaBlaster_skin1_squared.png",
 		
 		onEvent = handleLevelSelect4
 	}
