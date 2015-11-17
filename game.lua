@@ -48,7 +48,7 @@ local ship
 local speed = 2.5
 local shootbtn
 local ultbtn
-local enemyArray = {}
+local enemyshiptest = {}
 local astArray = {}
 local enemyNum = 0
 local astNum = 0
@@ -234,6 +234,41 @@ function shoot(tap, event)
 		timer.performWithDelay(300, enableBulletFire, 1)
 end
 
+--enemy maker
+function createEnemy()
+	enemyshiptest = display.newImage("assets/images/CrabHead25.png")
+	numEnemy = enemyshiptest
+	print(numEnemy)
+					enemies:toFront()
+					physics.addBody(numEnemy , {density= 0.5, friction = 0, bounce = 0 })
+					numEnemy.myName = "enemy"
+					local startingPosition = math.random(1,3)
+					if (startingPosition == 1) then
+						startingX = display.contentWidth + 10
+						startyingY = math.random(0, display.contentHeight)
+					elseif(startingPosition == 2)then
+						startingX = math.random(0, display.contentWidth)
+						startingY = 50
+					else
+						startingX = math.random(0, display.contentWidth)
+						startingY = display.contentHeight +10
+					end
+
+					numEnemy.x = startingX
+					numEnemy.y = startingY
+
+					-- enemyshiptest[numEnemy] .y = startlocationY
+					-- enemyshiptest.rotation = 180 --not working as intended
+					-- enemyshiptest.numBullets = 5
+
+					
+					numEnemy:scale(0.5, 0.5)
+
+					 --transition.to ( numEnemy , {time = math.random (12000, 20000), x = ship.x +500, y= math.random (0, display.contentHeight)})
+					 --enemies:insert(numEnemy)
+end
+
+
 function ult(tap, event)
 
 	local ultCollisionFilter = {categoryBits = 16, maskBits = 6}
@@ -267,7 +302,7 @@ end
 
 function startGame()
 createShip()
-
+createEnemy()
 
 shootbtn:addEventListener("tap", shootBtntouch)
 ultbtn:addEventListener("tap", ultBtntouch)
