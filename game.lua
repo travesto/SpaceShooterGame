@@ -24,14 +24,27 @@ end
 animateBackground()
 
 
---Top Layer of Background
+--Grayish Planet Layer of Background
 display.setDefault("textureWrapX","repeat")
 timer.performWithDelay(100000,1)
 local background = display.newRect(100, 100, 1477, 316)
-background.fill = {type = "image", filename = "assets/images/planet_extra.png" }
+background.fill = {type = "image", filename = "assets/images/background_planet_extra.png" }
 
 local function animateBackground()
     transition.to( background.fill, { time=60000, x=1, delta=true, onComplete=animateBackground } )
+end
+
+animateBackground()
+
+
+--Earth? Layer of Background
+display.setDefault("textureWrapX","repeat")
+timer.performWithDelay(100000,1)
+local background = display.newRect(100, 100, 4369, 768)
+background.fill = {type = "image", filename = "assets/images/background_new_moon-cut.png" }
+
+local function animateBackground()
+    transition.to( background.fill, { time=250000, x=1, delta=true, onComplete=animateBackground } )
 end
 
 animateBackground()
