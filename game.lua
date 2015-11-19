@@ -13,7 +13,8 @@ local scene = composer.newScene()
 
 
 --stop menu music
-audio.stop( gameMusicChannel )
+audio.stop(gameMusic)
+audio.stop(gameMusicChannel)
 
 --Music File Load and Play
 local gameMusic = audio.loadStream( "assets/sounds/bang bang bang.wav" )
@@ -253,7 +254,7 @@ function shoot(tap, event)
 		bullet.isBullet = true
 		
 		canFireBullet = false
-		audio.play(shot)
+		audio.play("assets/sounds/laser_1.mp3")   ----------------A button audio?
 		
 		bullet:scale(0.5,0.5)
 		
@@ -308,7 +309,7 @@ end
 function ult(tap, event)
 
 	local ultCollisionFilter = {categoryBits = 16, maskBits = 6}
-	local ult = display.newSprite( gameSheet , {frames={gameSheetInfo:getFrameIndex("RedRacer_genericbullet25")}})
+	local ult = display.newImage("assets/images/SpaceInvader_centergun.png")
 	physics.addBody(ult, {"static", filter = ultCollisionFilter})
 	ult.x = ship.x + 40
 	ult.y = ship.y
@@ -316,7 +317,7 @@ function ult(tap, event)
 	ult.name = "ultimate"
 	ult.isBullet = true
 	
-	audio.play(shot)  --<PH>
+	audio.play("assets/sounds/laser_2.mp3")  --<PH>  ------B Button Audio?
 	
 	ult:scale(0.5, 0.5)
 	

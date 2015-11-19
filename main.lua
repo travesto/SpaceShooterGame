@@ -15,6 +15,7 @@ local device = require( "device" )
 
 _G.playerShip=""
 _G.gameMusic=""
+_G.gameMusicChannel=""
 
 display.setStatusBar( display.HiddenStatusBar )
 
@@ -106,11 +107,12 @@ end
 --Game Music Goes here
 -- Define music variables
 --local gameMusic = audio.loadStream( "assets/sounds/looperman-l-0671112-0089763-danke-cosmic-signs.wav" )
-_G.gameMusic = audio.loadStream( "assets/sounds/looperman-l-0671112-0089763-danke-cosmic-signs.wav" )
+
+gameMusic = audio.loadStream( "assets/sounds/looperman-l-0671112-0089763-danke-cosmic-signs.wav" )
  
  
 -- Play the music
-local gameMusicChannel = audio.play( gameMusic, { loops = -1 } )
+gameMusicChannel = audio.play( gameMusic, { loops = -1 } )
 
 --
 -- handle system events
