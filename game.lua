@@ -122,7 +122,11 @@ local guiSheetInfo = require("assets.images.ingameguii")
 local guiSheet = graphics.newImageSheet("assets/images/ingameguii.png", guiSheetInfo:getSheet())
 
 --audio
-local shot = audio.loadSound("assets/sounds/laser.mp3")
+--local shot1 = ""
+--local shot2 = "assets/sounds/laser_2.mp3"
+--audio.loadSound("assets/sounds/laser.mp3") previous audio sound for both buttons
+
+
 --local backgroundsnd = audio.loadStream ("") 
 
 --<PH> background </PH>
@@ -254,7 +258,9 @@ function shoot(tap, event)
 		bullet.isBullet = true
 		
 		canFireBullet = false
-		audio.play("assets/sounds/laser_1.mp3")   ----------------A button audio?
+		local shot1=""
+		shot1=audio.loadStream( "assets/sounds/laser_2.mp3" )
+		audio.play(shot1) ----------------A button audio?
 		
 		bullet:scale(0.5,0.5)
 		
@@ -316,8 +322,10 @@ function ult(tap, event)
 	ult.gravityScale = 0
 	ult.name = "ultimate"
 	ult.isBullet = true
-	
-	audio.play("assets/sounds/laser_2.mp3")  --<PH>  ------B Button Audio?
+
+	local shot2=""
+	shot2=audio.loadStream( "assets/sounds/laser_1.mp3" )
+	audio.play(shot2) ----------------A button audio? --<PH>  ------B Button Audio?
 	
 	ult:scale(0.5, 0.5)
 	
