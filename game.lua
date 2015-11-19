@@ -11,6 +11,16 @@ local dusk = require("Dusk.dusk")
 local scene = composer.newScene()
 
 
+
+--stop menu music
+audio.stop( gameMusicChannel )
+
+--Music File Load and Play
+local gameMusic = audio.loadStream( "assets/sounds/bang bang bang.wav" )
+local gameMusicChannel = audio.play( gameMusic, { loops = -1 } )
+
+
+
 --wrap texture for background setup
 display.setDefault("textureWrapX", "repeat")
 
@@ -37,7 +47,20 @@ end
 animateBackground()
 
 
---Earth? Layer of Background
+--Actual Earth Layer
+display.setDefault("textureWrapX", "repeat")
+
+local background = display.newRect(display.contentCenterX, display.contentCenterY, 4313, 730)
+background.fill = {type = "image", filename = "assets/images/background_planet_cut.png" }
+
+local function animateBackground()
+    transition.to( background.fill, { time=200000, x=1, delta=true, onComplete=animateBackground } )
+end
+
+animateBackground()
+
+
+--Distorted Moon Layer of Background
 display.setDefault("textureWrapX","repeat")
 timer.performWithDelay(100000,1)
 local background = display.newRect(100, 100, 4369, 768)
