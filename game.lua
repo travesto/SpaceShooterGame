@@ -10,6 +10,15 @@ local dusk = require("Dusk.dusk")
 --scene starter
 local scene = composer.newScene()
 
+--menu button
+local function handlemenubuttonEvent( event )
+    if ( "ended" == event.phase ) then
+        composer.removeScene("menu", false )
+        composer.gotoScene("menu", { effect = "crossFade", time = 333 })
+    end
+end
+
+
 
 
 --stop menu music
@@ -104,6 +113,7 @@ local backgroundMusic
 local setGameOver = false 
 local removeEnemy
 local removeAsteroid
+local menubutton
 
 --physics engine init
 local physics = require ("physics")
@@ -143,6 +153,15 @@ levelNum = display.newText ("Level: ".. level, 15, 25, nil, 8)
 	He recommended using this code piece instead.
 	-->	display.contentHeight x .75
 ]]
+
+local menubutton = widget.newButton
+	{
+		width = 99,
+		height = 75,
+		defaultFile = "assets/images/gear.png",
+		
+		onEvent = handlemenubuttonEvent
+	}
 --<PH> GamePad </PH>
 local leftArrow = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark04")}})
 leftArrow.x = 48
