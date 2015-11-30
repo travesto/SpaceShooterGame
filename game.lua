@@ -10,17 +10,6 @@ local dusk = require("Dusk.dusk")
 --scene starter
 local scene = composer.newScene()
 
---menu button
-local function handlemenubuttonEvent( event )
-    if ( "ended" == event.phase ) then
-        composer.removeScene("menu", false )
-        composer.gotoScene("menu", { effect = "crossFade", time = 333 })
-    end
-end
-
-
-
-
 --stop menu music
 audio.stop(gameMusic)
 audio.stop(gameMusicChannel)
@@ -154,14 +143,25 @@ levelNum = display.newText ("Level: ".. level, 15, 25, nil, 8)
 	-->	display.contentHeight x .75
 ]]
 
+--menu button
+local widget = require( "widget" )
+local function handlemenubuttonEvent( event )
+    if ( "ended" == event.phase ) then
+        composer.removeScene("menu", false )
+        composer.gotoScene("menu", { effect = "crossFade", time = 333 })
+    end
+end
 local menubutton = widget.newButton
 	{
-		width = 99,
-		height = 75,
+		left = 515,
+		top = 10, 
+		width = 49,
+		height = 37,
 		defaultFile = "assets/images/gear.png",
 		
 		onEvent = handlemenubuttonEvent
 	}
+	
 --<PH> GamePad </PH>
 local leftArrow = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark04")}})
 leftArrow.x = 48
