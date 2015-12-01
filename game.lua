@@ -319,7 +319,7 @@ function createEnemy()
 
 					
 					numEnemy:scale(0.5, 0.5)
-
+					transition.to ( numEnemy , {time = 8000, x = ship.x -500})
 					 --transition.to ( numEnemy , {time = math.random (12000, 20000), x = ship.x +500, y= math.random (0, display.contentHeight)})
 					 --enemies:insert(numEnemy)
 end
