@@ -291,6 +291,13 @@ function shoot(tap, event)
 end
 
 --enemy maker
+--[[local spawnParams={
+	spawnTime = 10000000
+	spawnOnTimer = 12
+	spawnInitial = 4 
+}
+local function spawnController(action,Params)]]
+
 function createEnemy()
 	enemyshiptest = display.newImage("assets/images/CrabHead25.png")
 	numEnemy = enemyshiptest
@@ -320,8 +327,11 @@ function createEnemy()
 					
 					numEnemy:scale(0.5, 0.5)
 					transition.to ( numEnemy , {time = 8000, x = ship.x -500})
+					timer.performWithDelay( 1000, listener )
 					 --transition.to ( numEnemy , {time = math.random (12000, 20000), x = ship.x +500, y= math.random (0, display.contentHeight)})
 					 --enemies:insert(numEnemy)
+	--if (spawnTimer and ( action == "start" or action == "stop" ) ) then timer.cancel(spawnTimer)
+	--end			 
 end
 
 
