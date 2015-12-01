@@ -1,0 +1,258 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"int",
+				"interger"
+			],
+			[
+				"in",
+				"input"
+			],
+			[
+				"bal",
+				"balance1"
+			],
+			[
+				"bala",
+				"balance2"
+			],
+			[
+				"inter",
+				"interest2"
+			],
+			[
+				"r",
+				"rate2"
+			],
+			[
+				"pro",
+				"profit"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 47.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 115/Chapter 6/HR.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 115/Chapter 5 HW/Interest.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/ITC 11001/Webpage/index.html",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 115/Chapter 5 HW/sticks.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 115/Chapter 5 HW/RecStars.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/ITC 11001/Webpage/btk14b_sysadmin_asn.txt",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 115/Chapter 5 HW/Digits.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/ITC 11001/Webpage/btk14b_sysadmin_asn",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 115/Chapter 5 HW/Multi.py",
+		"/Users/TyKel/Documents/TBTProject/options.lua",
+		"/Users/TyKel/Documents/TBTProject/template.lua",
+		"/Users/TyKel/Documents/TBTProject/game.lua",
+		"/Users/TyKel/Documents/TBTProject/config.lua",
+		"/Users/TyKel/Documents/TBTProject/level.lua",
+		"/Users/TyKel/Documents/TBTProject/gameover.lua",
+		"/Users/TyKel/Documents/TBTProject/device.lua",
+		"/Users/TyKel/Google Drive/Drive Documents/College/ITC 11001/Webpage/btk14b+web_page_asn.html",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 115/Chapter 4 HW/Interest.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 115/Chapter 5 HW/Summation2.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 115/Chapter 5 HW/Summation1.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 115/Chapter 5 HW/Squarer.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 115/Chapter 5 HW/Counting2.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/ITC 11001/Webpage/IMG_7830.JPG",
+		"/Users/TyKel/Google Drive/Drive Documents/College/ITC 11001/index.html",
+		"/Users/TyKel/Google Drive/Drive Documents/College/ITC 11001/pdf.pdf",
+		"/Users/TyKel/Google Drive/Drive Documents/College/ITC 11001/main.html",
+		"/Users/TyKel/Documents/TBTProject/main.lua",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 115/Chapter 4 HW/Summation2.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 115/Chapter 4 HW/Summation1.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 115/Chapter 4 HW/Squarer.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 115/Chapter 4 HW/Squarer",
+		"/Users/TyKel/Downloads/TBTProject-master/main.lua",
+		"/Users/TyKel/Google Drive/area.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 155/Chapter 3 HW/Vowel.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/ITC 11001/physics.lua",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 155/Chapter 3 HW/bank.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/CS 155/Chapter 3 HW/maxofthree.py",
+		"/Users/TyKel/Google Drive/Drive Documents/College/Scripting/Interest.py",
+		"/Users/TyKel/Documents/College/ITC/New/new/main.lua",
+		"/Applications/CoronaSDK/SampleCode/Animation/SpriteTiles/main.lua",
+		"/Users/TyKel/Documents/College/Scripting/temperature.py",
+		"/Users/TyKel/Documents/College/Scripting/temperature",
+		"/Users/TyKel/Documents/College/ITC/Hi/main.lua",
+		"/Users/TyKel/Documents/College/Scripting/test.py",
+		"/Applications/Sublime Text.app/Contents/MacOS/Packages/Python.sublime-package"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"chapel"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 146.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"project": "main.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 182.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

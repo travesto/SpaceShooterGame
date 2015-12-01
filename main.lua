@@ -30,10 +30,13 @@ leftScrn = display.screenOriginX
  
  
 
+local splash = display.newImageRect("assets/images/iPad-Splashv33.png", display.contentWidth, display.contentHeight)
+splash.x = display.contentCenterX
+splash.y = display.contentCenterY
  
-local splash = display.newImage ("assets/images/iPad-Splashv33.png")
-splash.x = centerX
-splash.y = centerY
+--local splash = display.newImage ("assets/images/iPad-Splashv33.png")
+--splash.x = centerX
+--splash.y = centerY
 
  
 local function endSplash ()
