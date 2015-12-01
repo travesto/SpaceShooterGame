@@ -151,33 +151,27 @@ local function handlemenubuttonEvent( event )
         composer.gotoScene("menu", { effect = "crossFade", time = 333 })
     end
 end
-local menubutton = widget.newButton
-	{
-		left = 515,
-		top = 10, 
-		width = 49,
-		height = 37,
-		defaultFile = "assets/images/gear.png",
+local menubutton = display.newImage("assets/images/gear.png", 520,40 )
+	menubutton:scale(0.5,0.5)
+	menubutton:addEventListener("tap", handlemenubuttonEvent)
 		
-		onEvent = handlemenubuttonEvent
-	}
 	
 --<PH> GamePad </PH>
 local leftArrow = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark04")}})
-leftArrow.x = 48
-leftArrow.y = 300
+leftArrow.x = 28
+leftArrow.y = 280
 leftArrow:scale(0.5, 0.5)
 local rightArrow = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark05")}})
-rightArrow.x = 86
-rightArrow.y = 300
+rightArrow.x = 66
+rightArrow.y = 280
 rightArrow:scale(0.5, 0.5)
 local upArrow = display.newSprite(guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark02")}})
-upArrow.x = 67
-upArrow.y = 280
+upArrow.x = 47
+upArrow.y = 260
 upArrow:scale(0.5, 0.5)
 local downArrow = display.newSprite(guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark09")}})
-downArrow.x = 67
-downArrow.y = 320
+downArrow.x = 47
+downArrow.y = 300
 downArrow:scale(0.5, 0.5)
 
 
@@ -201,24 +195,24 @@ local function stopShip(event)
 			shipMoveY = 0
 	end
 end
-
+--ship boundaries
 local function moveShip(event)
-	if ship.x >= 50 and ship.x <= display.contentWidth - 50 	then 
+	if ship.x >= 25 and ship.x <= display.contentWidth - 25 	then 
 		ship.x = ship.x + shipMoveX
 	else
 		if ship.x < display.contentCenterX then
-			ship.x = 50
+			ship.x = 25
 		else
-			ship.x = display.contentWidth - 50
+			ship.x = display.contentWidth - 25
 		end
 	end
-	if ship.y >= 50 and ship.y <= display.contentHeight - 50 then
+	if ship.y >= 25 and ship.y <= display.contentHeight - 25 then
 		ship.y = ship.y + shipMoveY
 	else
 		if ship.y < display.contentCenterY then
-			ship.y = 50
+			ship.y = 25
 		else
-			ship.y = display.contentHeight - 50
+			ship.y = display.contentHeight - 25
 		end
 	end
 end

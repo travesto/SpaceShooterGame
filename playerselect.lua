@@ -154,7 +154,7 @@ function scene:create( event )
 
     local doneButton = widget.newButton({
         id = "button1",
-        label = "Get the hell out of here!",
+        label = "Return",
         width = 100,
         height = 32,
         onEvent = handleButtonEvent
