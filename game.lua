@@ -304,16 +304,16 @@ function createEnemy()
 					enemies:toFront()
 					physics.addBody(numEnemy , {density= 0.5, friction = 0, bounce = 0 })
 					numEnemy.myName = "enemy"
-					local startingPosition = math.random(1,3)
+					local startingPosition = 1
 					if (startingPosition == 1) then
 						startingX = display.contentWidth + 10
-						startyingY = math.random(0, display.contentHeight)
-					elseif(startingPosition == 2)then
-						startingX = math.random(0, display.contentWidth)
-						startingY = 50
-					else
-						startingX = math.random(0, display.contentWidth)
-						startingY = display.contentHeight +10
+						startingY = display.contentHeight - math.random(0,display.contentHeight)
+					--elseif(startingPosition == 2)then
+					--	startingX = math.random(0, display.contentWidth)
+					--	startingY = 50
+					--else
+					--	startingX = math.random(0, display.contentWidth)
+					--	startingY = display.contentHeight +10
 					end
 
 					numEnemy.x = startingX
