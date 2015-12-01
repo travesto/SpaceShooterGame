@@ -300,7 +300,7 @@ function createEnemy()
 					numEnemy.myName = "enemy"
 					local startingPosition = 1
 					if (startingPosition == 1) then
-						startingX = display.contentWidth + 10
+						startingX = display.contentWidth + 100
 						startingY = display.contentHeight - math.random(0,display.contentHeight)
 					--elseif(startingPosition == 2)then
 					--	startingX = math.random(0, display.contentWidth)
