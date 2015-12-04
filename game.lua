@@ -7,6 +7,7 @@ local cWidth = display.contentCenterX
 local cHeight = display.contentCenterY
 local dusk = require("Dusk.dusk")
 
+
 --scene starter
 local scene = composer.newScene()
 
@@ -102,7 +103,6 @@ local backgroundMusic
 local setGameOver = false 
 local removeEnemy
 local removeAsteroid
-local menubutton
 
 --physics engine init
 local physics = require ("physics")
@@ -154,7 +154,35 @@ end
 local menubutton = display.newImage("assets/images/gear.png", 520,40 )
 	menubutton:scale(0.5,0.5)
 	menubutton:addEventListener("tap", handlemenubuttonEvent)
-		
+--[[
+function scene:create( event )
+	local sceneGroup = self.view
+	params = event.params
+	--	menu widget
+	local widget = require( "widget" )
+
+	local function handlemenuButtonEvent( event )
+    	if ( "ended" == event.phase ) then
+        	composer.removeScene("game", false )
+        	composer.gotoScene("game", {effect = "crossFade", time = 333})
+    	end
+	end
+
+	--
+	local menuButton = widget.newButton({
+    	    id = "menubutton",
+        	label = "Menu",
+        	width = 100,
+        	height = 32,
+        	onEvent = handlemenuButtonEvent,
+        	labelColor = {default = { 1,1,1}, over = {1,1,1}}
+	    })
+    	menuButton.x = display.contentCenterX
+    	menuButton.y = display.contentCenterY -10
+    	sceneGroup:insert (menuButton)
+end	
+]]	
+
 	
 --<PH> GamePad </PH>
 local leftArrow = display.newSprite( guiSheet, {frames={guiSheetInfo:getFrameIndex("flatDark04")}})
