@@ -69,7 +69,7 @@ function scene:create( event )
     -- title:setFillColor( 0,1,0 )
     -- sceneGroup:insert( title )
 	---------------------------------------------------------------------------------------------------------------------------------------------------------------
-	local versionText = display.newText("Version 0.7.1 We're in Beta, yo! (311015)Development", 12, 12, native.systemFont, 8)
+	local versionText = display.newText("Version 0.8.9.2 (041215) Development", 12, 12, native.systemFont, 8)
 	versionText.x = 75
 	versionText.y = 350
 	versionText:setFillColor(0,1,0)
