@@ -151,7 +151,7 @@ local function handlemenubuttonEvent( event )
         composer.gotoScene("menu", { effect = "crossFade", time = 333 })
     end
 end
-local menubutton = display.newImage("assets/images/gear.png", 520,40 )
+local menubutton = display.newImage("assets/images/gear.png", 520,50 )--use 490,50 for demo phone
 	menubutton:scale(0.5,0.5)
 	menubutton:addEventListener("tap", handlemenubuttonEvent)
 --[[
