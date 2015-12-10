@@ -90,6 +90,7 @@ local enemyNum = 0
 local astNum = 0
 local gameActive = true
 local canFireBullet = true
+local enemySpawn = 1000; -- sets the bg spawn rate
 
 
 --global function
@@ -151,8 +152,8 @@ local function handlemenubuttonEvent( event )
         composer.gotoScene("menu", { effect = "crossFade", time = 333 })
     end
 end
-local menubutton = display.newImage("assets/images/gear.png", 520,40 )
-	menubutton:scale(0.5,0.5)
+local menubutton = display.newImage("assets/images/gear.png", 545,20 )
+	menubutton:scale(0.25,0.25)
 	menubutton:addEventListener("tap", handlemenubuttonEvent)
 --[[
 function scene:create( event )
@@ -330,32 +331,13 @@ function createEnemy()
 	enemyshiptest = display.newImage("assets/images/CrabHead25.png")
 	numEnemy = enemyshiptest
 	print(numEnemy)
-					enemies:toFront()
-					physics.addBody(numEnemy , {density= 0.5, friction = 0, bounce = 0 })
-					numEnemy.myName = "enemy"
-					local startingPosition = 1
-					if (startingPosition == 1) then
-						startingX = display.contentWidth + 100
-						startingY = display.contentHeight - math.random(0,display.contentHeight)
-					--elseif(startingPosition == 2)then
-					--	startingX = math.random(0, display.contentWidth)
-					--	startingY = 50
-					--else
-					--	startingX = math.random(0, display.contentWidth)
-					--	startingY = display.contentHeight +10
-					end
-
-					numEnemy.x = startingX
-					numEnemy.y = startingY
-
-					-- enemyshiptest[numEnemy] .y = startlocationY
-					-- enemyshiptest.rotation = 180 --not working as intended
-					-- enemyshiptest.numBullets = 5
-
-					
-					numEnemy:scale(0.5, 0.5)
-					transition.to ( numEnemy , {time = 8000, x = ship.x -500})
-					timer.performWithDelay( 1000, listener )
+	physics.addBody(numEnemy, {isSensor = true })
+	numEnemy.name = "enemy"
+	numEnemy.x = 500
+	numEnemy.y = math.random(10, cHeight-10)
+	numEnemy:scale(0.5, 0.5)
+	transition.to ( numEnemy , {time = 2375, x = ship.x -20})
+    --timer.performWithDelay( 1000, listener )
 					 --transition.to ( numEnemy , {time = math.random (12000, 20000), x = ship.x +500, y= math.random (0, display.contentHeight)})
 					 --enemies:insert(numEnemy)
 	--if (spawnTimer and ( action == "start" or action == "stop" ) ) then timer.cancel(spawnTimer)
@@ -393,9 +375,11 @@ end
 --enemy, asteroid, level progression
 --on level progression the game will reset the scene to 0 increase the level text by 1 and change the spawns based on code
 
+function scene:enterScene(event)
+	local group = self.view
+	tmr_enemy = timer.performWithDelay(enemySpawn, createEnemy, 5)
 
-
-
+end
 function startGame()
 createShip()
 createEnemy()
